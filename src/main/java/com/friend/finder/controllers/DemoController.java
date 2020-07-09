@@ -11,8 +11,9 @@ public class DemoController {
     @Autowired
     PasswordEncoder encoder;
 
-    @GetMapping("/contact")
+    @GetMapping("/")
     public String getContact(){
-        return "contact";
+        return "newsfeed";
     }
+
 }
