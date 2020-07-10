@@ -13,7 +13,7 @@ public class Newsfeed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "newsfeed")
     private Account account;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

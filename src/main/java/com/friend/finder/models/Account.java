@@ -26,7 +26,8 @@ public class Account {
     @Email
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "newsfeed_id")
     private Newsfeed newsfeed;
 
     @OneToMany(cascade = CascadeType.ALL)

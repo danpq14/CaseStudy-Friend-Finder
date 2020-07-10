@@ -43,6 +43,9 @@ public class AccountProfile {
     @Column(columnDefinition = "varchar(1000) default 'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png' ")
     private String avatar;
 
+    @Column(columnDefinition = "varchar(1000) default 'https://www.gocbao.com/wp-content/uploads/2020/04/anh-bia-phong-canh-dep-13.jpg' ")
+    private String cover;
+
     private String gender;
 
     @OneToOne

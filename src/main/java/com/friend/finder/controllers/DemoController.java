@@ -13,7 +13,7 @@ public class DemoController {
 
     @GetMapping("/")
     public String getContact(){
-        return "newsfeed";
+        return "timeline";
     }
 
 }
