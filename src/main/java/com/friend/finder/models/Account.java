@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +24,10 @@ public class Account {
     @Column(nullable = false)
     @Email
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "newsfeed_id")

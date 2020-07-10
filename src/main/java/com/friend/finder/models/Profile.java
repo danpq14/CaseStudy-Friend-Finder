@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Data
-public class AccountProfile {
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class AccountProfile {
     @Column(columnDefinition = "varchar(255) default 'No Information' ")
     private String relation;
 
-    @Column(columnDefinition = "TEXT default 'No Information' ")
+    @Column(columnDefinition = "TEXT")
     private String information;
 
     @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
@@ -48,6 +48,6 @@ public class AccountProfile {
 
     private String gender;
 
-    @OneToOne
+    @OneToOne(mappedBy = "profile")
     private Account account;
 }
