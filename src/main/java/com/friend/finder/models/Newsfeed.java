@@ -1,9 +1,12 @@
 package com.friend.finder.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Data
 public class Newsfeed {
 
     @Id
@@ -18,4 +21,5 @@ public class Newsfeed {
                 joinColumns = @JoinColumn(name = "newsfeed_id"),
                 inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<Post> postSet;
+
 }

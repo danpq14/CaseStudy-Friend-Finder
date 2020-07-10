@@ -3,16 +3,20 @@ package com.friend.finder.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "images")
 @Data
-public class Image {
+public class Timeline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String href;
+    @OneToOne
+    private Account account;
+
+//    @OneToMany
+//    private Set<Post> postSet;
 
 }

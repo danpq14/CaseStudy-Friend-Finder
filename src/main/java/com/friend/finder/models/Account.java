@@ -22,29 +22,18 @@ public class Account {
 
     private String password;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
-    private String firstName;
-
-    @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
-    private String lastName;
-
-    @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
-    private String phone;
-
     @Column(nullable = false)
     @Email
     private String email;
 
-    @Column(nullable = true)
-    private Date birthDay;
-
-    @Column(columnDefinition = "varchar(1000) default 'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png' ")
-    private String avatar;
-
     @OneToOne
     private Newsfeed newsfeed;
 
-    private String gender;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "account_post",
+                joinColumns = @JoinColumn(name = "account_id"),
+                inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private Set<Post> posts;
 
     @ManyToMany(cascade={CascadeType.ALL})
     @JoinTable(name="account_friend",

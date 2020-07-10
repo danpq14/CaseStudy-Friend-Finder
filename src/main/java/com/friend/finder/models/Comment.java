@@ -4,11 +4,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
 @Entity
 @Data
-public class Post {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +16,8 @@ public class Post {
     @ManyToOne
     private Account account;
 
-    @Column(columnDefinition = "TEXT")
+    @Column (columnDefinition = "TEXT default '' ")
     private String content;
 
-    @OneToMany
-    private Set<Likes> likes;
-
-    @OneToMany
-    private Set<Dislikes> dislikes;
-
     private Timestamp postTime;
-
-    @ManyToMany(mappedBy = "postSet")
-    private Set<Newsfeed> newsfeedSet;
 }
