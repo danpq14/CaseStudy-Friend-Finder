@@ -1,5 +1,6 @@
 package com.friend.finder;
 
+import com.friend.finder.models.Account;
 import com.friend.finder.models.Newsfeed;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

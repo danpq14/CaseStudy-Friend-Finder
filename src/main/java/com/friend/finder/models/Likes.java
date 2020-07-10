@@ -13,11 +13,13 @@ public class Likes {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @ManyToOne
+    @JoinColumn(name = "post_id")
     private Post post;
 
-    @Column(columnDefinition = "default = 'false'")
+    @Column
     private String status;
 }

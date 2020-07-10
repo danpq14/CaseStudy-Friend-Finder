@@ -20,7 +20,7 @@ public class Post {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @OneToMany
+    @OneToMany(mappedBy = "post")
     private Set<Likes> likes;
 
     @OneToMany

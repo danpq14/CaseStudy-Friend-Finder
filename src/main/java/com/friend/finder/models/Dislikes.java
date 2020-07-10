@@ -11,11 +11,12 @@ public class Dislikes {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @ManyToOne
     private Post post;
 
-    @Column(columnDefinition = "default = 'false'")
+    @Column
     private String status;
 }

@@ -45,6 +45,11 @@ public class Account {
             inverseJoinColumns={@JoinColumn(name="friend_id")})
     private Set<Account> friends = new HashSet<Account>();
 
+    @OneToMany(mappedBy = "account")
+    private Set<Likes> likes;
+
+    @OneToMany(mappedBy = "account")
+    private Set<Dislikes> dislikes;
 //    @ManyToMany(mappedBy="friends")
 //    private Set<Account> teammates = new HashSet<Account>();
 
