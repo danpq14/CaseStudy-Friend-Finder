@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,8 +19,11 @@ public class Account {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    @Size(min=6, max=20)
     private String username;
 
+    @NotEmpty
+    @Size(min = 6)
     private String password;
 
     @Column(nullable = false)

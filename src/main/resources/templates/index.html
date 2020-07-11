@@ -105,23 +105,23 @@
 					<a href="index.html" class="logo"><img src="/static/images/logo.png" alt="Friend Finder"/></a>
 					<h2 class="text-white">Find My Friends</h2>
 					<div class="line-divider"></div>
-					<div class="form-wrapper">
+					<div class="form-wrapper" th:object="${account}">
 						<p class="signup-text">Signup now and meet awesome people around the world</p>
-						<form action="#">
+						<form action="/signUp" method="post">
 							<fieldset class="form-group">
-								<input type="text" class="form-control" id="example-name" placeholder="Enter username">
+								<input type="text" class="form-control" id="example-name" th:field="${account.username}" placeholder="Enter username">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="email" class="form-control" id="example-email" placeholder="Enter email">
+								<input type="email" class="form-control" id="example-email" th:field="${account.email}" placeholder="Enter email">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="example-password" placeholder="Enter a password">
+								<input type="password" class="form-control" id="example-password" th:field="${account.password}" placeholder="Enter a password">
 							</fieldset>
+							<p>By signning up you agree to the terms</p>
+							<button class="btn-secondary">Signup</button>
 						</form>
-						<p>By signning up you agree to the terms</p>
-						<button class="btn-secondary">Signup</button>
 					</div>
-					<a href="#">Already have an account?</a>
+					<a href="/login">Already have an account?</a>
 					<img class="form-shadow" src="/static/images/bottom-shadow.png" alt="" />
 				</div><!-- Sign Up Form End -->
 

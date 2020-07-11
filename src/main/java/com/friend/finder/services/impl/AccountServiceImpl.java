@@ -38,4 +38,9 @@ public class AccountServiceImpl implements AccountService {
     public int countAccountByUserName() {
         return accountRepository.countAccountByUsername();
     }
+
+    @Override
+    public Account findAccountByUserName(String username) {
+        return accountRepository.findAccountByUsername(username);
+    }
 }

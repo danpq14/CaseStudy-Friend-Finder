@@ -1,5 +1,6 @@
-package com.friend.finder.controllers;
+package com.friend.finder.controllers.normal_controller;
 
+import com.friend.finder.models.Account;
 import com.friend.finder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,8 @@ public class IndexController {
 
     @GetMapping("/")
     public String getIndexPage(Model model){
-        int users = accountService.countAccountByUserName();
-        model.addAttribute("users", users);
+        Account account = new Account();
+        model.addAttribute("account", account);
         return "index";
     }
 }
