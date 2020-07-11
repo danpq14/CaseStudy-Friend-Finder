@@ -2,22 +2,24 @@ package com.friend.finder.controllers.normal_controller;
 
 import com.friend.finder.models.Profile;
 import com.friend.finder.services.ProfileService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
 
 @Controller
 public class ProfileController {
-
+    private static Profile profile = new Profile();
 
     @GetMapping("/timeline")
     public String showTimelinePage(Model model){
         Date date = new Date(2020-12-1);
-        Profile profile = new Profile();
         profile.setAddress("Hà Nội");
         profile.setInterest("Book");
         profile.setJob("Worker");
@@ -34,23 +36,16 @@ public class ProfileController {
         return "timeline-about";
     }
 
-    @GetMapping("/timeline/edit")
+    @GetMapping("/timeline-edit")
     public ModelAndView editInfoPage(){
         ModelAndView modelAndView = new ModelAndView("edit-timeline-about");
-        Date date = new Date(2020-12-1);
-        Profile profile = new Profile();
-        profile.setAddress("Hà Nội");
-        profile.setInterest("Book");
-        profile.setJob("Worker");
-        profile.setRelation("Single");
-        profile.setInformation("Logic, Hướng nội, Vững chắc");
-        profile.setFirstName("Steven");
-        profile.setLastName("Lee");
-        profile.setPhone("016758498");
-        profile.setBirthDay(date);
-        profile.setAvatar("https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png");
-        profile.setCover("https://www.gocbao.com/wp-content/uploads/2020/04/anh-bia-phong-canh-dep-13.jpg");
-        profile.setGender("Male");
+        modelAndView.addObject("profile",profile);
+        return modelAndView;
+    }
+    @PostMapping("/timeline-edit")
+    public ModelAndView saveProfile(@ModelAttribute Profile profiles){
+        profile = profiles;
+        ModelAndView modelAndView = new ModelAndView("timeline-about");
         modelAndView.addObject("profile",profile);
         return modelAndView;
     }

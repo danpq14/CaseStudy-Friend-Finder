@@ -69,8 +69,9 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">All Pages <span><img src="/static/images/down-arrow.png"
-                                                                                           alt=""/></span></a>
+                           aria-haspopup="true" aria-expanded="false">All Pages <span><img
+                                src="/static/images/down-arrow.png"
+                                alt=""/></span></a>
                         <ul class="dropdown-menu page-list">
                             <li><a href="index.html">Landing Page</a></li>
                             <li><a href="newsfeed.html">Newsfeed</a></li>
@@ -154,188 +155,241 @@
 
         </div>
         <div id="page-contents">
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-7">
+            <form method="post" th:action="@{/timeline-edit}" th:object="${profile}">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-7">
 
-                    <!-- About
-                    ================================================= -->
-                    <div class="about-profile">
+                        <!-- About
+                        ================================================= -->
                         <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Personal
-                                Information</h4>
-                            <p th:text="${profile.information}"></p>
-                        </div>
-                        <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Relation</h4>
+                            <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>First Name</h4>
                             <div class="organization">
                                 <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
                                 <div class="work-info">
-                                    <h5 th:text="${profile.relation}"></h5>
+                                    <input type="text" th:field="*{firstName}">
                                 </div>
                             </div>
-                        </div>
-                        <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Phone Number
-                            </h4>
-                            <div class="organization">
-                                <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
-                                <div class="work-info">
-                                    <h5 th:text="${profile.phone}"></h5>
+                            <div class="about-content-block">
+                                <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Last Name</h4>
+                                <div class="organization">
+                                    <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
+                                    <div class="work-info">
+                                        <input type="text" th:field="*{lastName}">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Gender
-                            </h4>
-                            <div class="organization">
-                                <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
-                                <div class="work-info">
-                                    <h5 th:text="${profile.gender}"></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>
-                            <p th:text="${profile.address}"></p>
-                            <div class="google-maps">
-                                <div id="map" class="map"></div>
-                            </div>
-                        </div>
 
-                        <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-ios-heart-outline icon-in-title"></i>Interests</h4>
-                            <div class="organization">
-                                <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
-                                <div class="work-info">
-                                    <h5 th:text="${profile.interest}"></h5>
+                                <div class="about-profile">
+                                    <div class="about-content-block">
+                                        <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Personal
+                                            Information</h4>
+                                        <input type="text" th:field="*{information}">
+                                    </div>
+<!--                                    <div class="about-content-block">-->
+<!--                                        <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Birthday-->
+<!--                                        </h4>-->
+<!--                                        <div class="organization">-->
+<!--                                            <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>-->
+<!--                                            <div class="work-info">-->
+<!--                                                <input type="date" th:field="*{birthDay}">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Relation
+                                            </h4>
+                                            <div class="organization">
+                                                <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
+                                                <div class="work-info">
+                                                    <input type="text" th:field="*{relation}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Phone
+                                                Number
+                                            </h4>
+                                            <div class="organization">
+                                                <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
+                                                <div class="work-info">
+                                                    <input type="text" th:field="*{phone}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Gender
+                                            </h4>
+                                            <div class="organization">
+                                                <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
+                                                <div class="work-info">
+                                                    <input type="text" th:field="*{gender}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location
+                                            </h4>
+                                            <input type="text" th:field="*{address}">
+                                            <!--                                <div class="google-maps">-->
+                                            <!--                                    <div id="map" class="map"></div>-->
+                                            <!--                                </div>-->
+                                        </div>
+
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-heart-outline icon-in-title"></i>Interests
+                                            </h4>
+                                            <div class="organization">
+                                                <img src="/static/images/envato.png" alt="" class="pull-left img-org"/>
+                                                <div class="work-info">
+                                                    <input type="text" th:field="*{interest}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Occupation
+                                            </h4>
+                                            <ul>
+                                                <input type="text" th:field="*{job}">
+                                            </ul>
+                                        </div>
+
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Url
+                                                Avatar
+                                            </h4>
+                                            <ul>
+                                                <input type="text" th:field="*{avatar}">
+                                            </ul>
+                                        </div>
+
+                                        <div class="about-content-block">
+                                            <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Url
+                                                Cover Photo
+                                            </h4>
+                                            <ul>
+                                                <input type="text" th:field="*{cover}">
+                                            </ul>
+                                        </div>
+
+                                    </div>
                                 </div>
+                                <input type="submit" class="btn btn-primary"></input>
                             </div>
-                        </div>
-                        <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Occupation
-                            </h4>
-                            <ul>
-                                <li><p th:text="${profile.job}"></p></li>
-                            </ul>
+                            <!--            <div class="col-md-2 static">-->
+                            <!--              <div id="sticky-sidebar">-->
+                            <!--                <h4 class="grey">Sarah's activity</h4>-->
+                            <!--                <div class="feed-item">-->
+                            <!--                  <div class="live-activity">-->
+                            <!--                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>-->
+                            <!--                    <p class="text-muted">5 mins ago</p>-->
+                            <!--                  </div>-->
+                            <!--                </div>-->
+                            <!--                <div class="feed-item">-->
+                            <!--                  <div class="live-activity">-->
+                            <!--                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>-->
+                            <!--                    <p class="text-muted">an hour ago</p>-->
+                            <!--                  </div>-->
+                            <!--                </div>-->
+                            <!--                <div class="feed-item">-->
+                            <!--                  <div class="live-activity">-->
+                            <!--                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>-->
+                            <!--                    <p class="text-muted">4 hours ago</p>-->
+                            <!--                  </div>-->
+                            <!--                </div>-->
+                            <!--                <div class="feed-item">-->
+                            <!--                  <div class="live-activity">-->
+                            <!--                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>-->
+                            <!--                    <p class="text-muted">a day ago</p>-->
+                            <!--                  </div>-->
+                            <!--                </div>-->
+                            <!--              </div>-->
+                            <!--            </div>-->
                         </div>
                     </div>
                 </div>
-                <a href="/timeline/edit" class="btn btn-primary">Edit Information</a>
-
-                <!--            <div class="col-md-2 static">-->
-                <!--              <div id="sticky-sidebar">-->
-                <!--                <h4 class="grey">Sarah's activity</h4>-->
-                <!--                <div class="feed-item">-->
-                <!--                  <div class="live-activity">-->
-                <!--                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>-->
-                <!--                    <p class="text-muted">5 mins ago</p>-->
-                <!--                  </div>-->
-                <!--                </div>-->
-                <!--                <div class="feed-item">-->
-                <!--                  <div class="live-activity">-->
-                <!--                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>-->
-                <!--                    <p class="text-muted">an hour ago</p>-->
-                <!--                  </div>-->
-                <!--                </div>-->
-                <!--                <div class="feed-item">-->
-                <!--                  <div class="live-activity">-->
-                <!--                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>-->
-                <!--                    <p class="text-muted">4 hours ago</p>-->
-                <!--                  </div>-->
-                <!--                </div>-->
-                <!--                <div class="feed-item">-->
-                <!--                  <div class="live-activity">-->
-                <!--                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>-->
-                <!--                    <p class="text-muted">a day ago</p>-->
-                <!--                  </div>-->
-                <!--                </div>-->
-                <!--              </div>-->
-                <!--            </div>-->
-            </div>
+            </form>
         </div>
+
     </div>
-</div>
 
 
-<!-- Footer
-================================================= -->
-<footer id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="footer-wrapper">
-                <div class="col-md-3 col-sm-3">
-                    <a href=""><img src="/static/images/logo-black.png" alt="" class="footer-logo"/></a>
-                    <ul class="list-inline social-icons">
-                        <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-                        <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-                        <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <h6>For individuals</h6>
-                    <ul class="footer-links">
-                        <li><a href="">Signup</a></li>
-                        <li><a href="">login</a></li>
-                        <li><a href="">Explore</a></li>
-                        <li><a href="">Finder app</a></li>
-                        <li><a href="">Features</a></li>
-                        <li><a href="">Language settings</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <h6>For businesses</h6>
-                    <ul class="footer-links">
-                        <li><a href="">Business signup</a></li>
-                        <li><a href="">Business login</a></li>
-                        <li><a href="">Benefits</a></li>
-                        <li><a href="">Resources</a></li>
-                        <li><a href="">Advertise</a></li>
-                        <li><a href="">Setup</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <h6>About</h6>
-                    <ul class="footer-links">
-                        <li><a href="">About us</a></li>
-                        <li><a href="">Contact us</a></li>
-                        <li><a href="">Privacy Policy</a></li>
-                        <li><a href="">Terms</a></li>
-                        <li><a href="">Help</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-3">
-                    <h6>Contact Us</h6>
-                    <ul class="contact">
-                        <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
-                        <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
-                        <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
-                    </ul>
+    <!-- Footer
+    ================================================= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-wrapper">
+                    <div class="col-md-3 col-sm-3">
+                        <a href=""><img src="/static/images/logo-black.png" alt="" class="footer-logo"/></a>
+                        <ul class="list-inline social-icons">
+                            <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <h6>For individuals</h6>
+                        <ul class="footer-links">
+                            <li><a href="">Signup</a></li>
+                            <li><a href="">login</a></li>
+                            <li><a href="">Explore</a></li>
+                            <li><a href="">Finder app</a></li>
+                            <li><a href="">Features</a></li>
+                            <li><a href="">Language settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <h6>For businesses</h6>
+                        <ul class="footer-links">
+                            <li><a href="">Business signup</a></li>
+                            <li><a href="">Business login</a></li>
+                            <li><a href="">Benefits</a></li>
+                            <li><a href="">Resources</a></li>
+                            <li><a href="">Advertise</a></li>
+                            <li><a href="">Setup</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <h6>About</h6>
+                        <ul class="footer-links">
+                            <li><a href="">About us</a></li>
+                            <li><a href="">Contact us</a></li>
+                            <li><a href="">Privacy Policy</a></li>
+                            <li><a href="">Terms</a></li>
+                            <li><a href="">Help</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <h6>Contact Us</h6>
+                        <ul class="contact">
+                            <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
+                            <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
+                            <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="copyright">
-        <p>Thunder Team © 2016. All rights reserved</p>
-    </div>
-</footer>
+        <div class="copyright">
+            <p>Thunder Team © 2016. All rights reserved</p>
+        </div>
+    </footer>
 
-<!--preloader-->
-<div id="spinner-wrapper">
-    <div class="spinner"></div>
-</div>
+    <!--preloader-->
+    <div id="spinner-wrapper">
+        <div class="spinner"></div>
+    </div>
 
-<!-- Scripts
-================================================= -->
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
-<script src="/static/js/jquery-3.1.1.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/jquery.sticky-kit.min.js"></script>
-<script src="/static/js/jquery.scrollbar.min.js"></script>
-<script src="/static/js/script.js"></script>
+    <!-- Scripts
+    ================================================= -->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.sticky-kit.min.js"></script>
+    <script src="/static/js/jquery.scrollbar.min.js"></script>
+    <script src="/static/js/script.js"></script>
 
 </body>
 </html>
