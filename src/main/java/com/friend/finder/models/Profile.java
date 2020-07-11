@@ -20,7 +20,7 @@ public class Profile {
     private String interest;
 
     @Column(columnDefinition = "varchar(255) default 'No Information' ")
-    private String language;
+    private String job;
 
     @Column(columnDefinition = "varchar(255) default 'No Information' ")
     private String relation;

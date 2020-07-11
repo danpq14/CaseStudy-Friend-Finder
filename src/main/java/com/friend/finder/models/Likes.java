@@ -22,4 +22,5 @@ public class Likes {
 
     @Column
     private String status;
+
 }
