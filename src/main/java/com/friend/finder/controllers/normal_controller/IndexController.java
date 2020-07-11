@@ -16,6 +16,7 @@ public class IndexController {
     @GetMapping("/")
     public String getIndexPage(Model model){
         Account account = new Account();
+
         model.addAttribute("account", account);
         return "index";
     }

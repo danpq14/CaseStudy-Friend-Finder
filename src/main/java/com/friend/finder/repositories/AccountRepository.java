@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
-     Integer countAccountByUsername();
+//     Integer countAccountsByUsernameIsNotNull();
      Account findAccountByUsername(String username);
 }

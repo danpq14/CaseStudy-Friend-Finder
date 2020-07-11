@@ -40,8 +40,8 @@ public class SignUpController {
             }
             accountService.save(account);
             modelAndView.addObject("message","Sign Up New Account Success ! Please Log in");
-            modelAndView.setViewName("/login");
+            modelAndView.setViewName("login-page");
+            return modelAndView;
         }
-
     }
 }

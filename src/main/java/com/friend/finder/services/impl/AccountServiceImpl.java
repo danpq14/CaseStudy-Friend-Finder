@@ -34,10 +34,10 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.deleteById(id);
     }
 
-    @Override
-    public int countAccountByUserName() {
-        return accountRepository.countAccountByUsername();
-    }
+//    @Override
+//    public int countAccountByUserName() {
+//        return accountRepository.countAccountByUsername();
+//    }
 
     @Override
     public Account findAccountByUserName(String username) {

@@ -105,17 +105,20 @@
 					<a href="index.html" class="logo"><img src="/static/images/logo.png" alt="Friend Finder"/></a>
 					<h2 class="text-white">Find My Friends</h2>
 					<div class="line-divider"></div>
-					<div class="form-wrapper" th:object="${account}">
+					<div class="form-wrapper">
 						<p class="signup-text">Signup now and meet awesome people around the world</p>
-						<form action="/signUp" method="post">
+						<form th:action="@{/signUp}" method="post"  th:object="${account}">
 							<fieldset class="form-group">
-								<input type="text" class="form-control" id="example-name" th:field="${account.username}" placeholder="Enter username">
+								<input type="text" class="form-control" id="example-name" th:field="*{username}">
+								<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="email" class="form-control" id="example-email" th:field="${account.email}" placeholder="Enter email">
+								<input type="email" class="form-control" id="example-email" th:field="*{email}">
+								<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="example-password" th:field="${account.password}" placeholder="Enter a password">
+								<input type="password" class="form-control" id="example-password" th:field="*{password}">
+								<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 							</fieldset>
 							<p>By signning up you agree to the terms</p>
 							<button class="btn-secondary">Signup</button>
@@ -157,7 +160,7 @@
 					</div>
 				</div>
 				<h2 class="sub-title">find awesome people like you</h2>
-				<div id="incremental-counter" th:></div>
+				<div id="incremental-counter"></div>
 				<p>People Already Signed Up</p>
 				<img src="/static/images/face-map.png" alt="" class="img-responsive face-map slideUp hidden-sm hidden-xs" />
 			</div>

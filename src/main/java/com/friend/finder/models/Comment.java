@@ -16,7 +16,7 @@ public class Comment {
     @ManyToOne
     private Account account;
 
-    @Column (columnDefinition = "TEXT default '' ")
+    @Column (columnDefinition = "TEXT")
     private String content;
 
     private Timestamp postTime;

@@ -4,7 +4,7 @@ import com.friend.finder.models.Account;
 
 public interface AccountService extends FullService<Account> {
 
-    int countAccountByUserName();
+//    int countAccountByUserName();
 
     Account findAccountByUserName(String username);
 }
