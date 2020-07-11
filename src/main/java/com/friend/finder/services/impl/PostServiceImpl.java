@@ -3,12 +3,13 @@ package com.friend.finder.services.impl;
 import com.friend.finder.models.Post;
 import com.friend.finder.repositories.PostRepository;
 import com.friend.finder.services.FullService;
+import com.friend.finder.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
-public class PostServiceImpl implements FullService<Post> {
+public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
     @Override
