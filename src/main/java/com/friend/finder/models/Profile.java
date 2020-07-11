@@ -37,8 +37,8 @@ public class Profile {
     @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
     private String phone;
 
-    @Column(nullable = true)
-    private Date birthDay;
+    @Column(nullable = true,columnDefinition = "varchar(255) default '' ")
+    private String birthDay;
 
     @Column(columnDefinition = "varchar(1000) default 'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png' ")
     private String avatar;

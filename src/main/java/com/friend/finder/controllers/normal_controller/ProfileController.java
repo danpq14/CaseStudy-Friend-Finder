@@ -17,9 +17,9 @@ import java.sql.Date;
 public class ProfileController {
     private static Profile profile = new Profile();
 
-    @GetMapping("/timeline")
+    @GetMapping("/timeline-about")
     public String showTimelinePage(Model model){
-        Date date = new Date(2020-12-1);
+        String date = "2020-12-1";
         profile.setAddress("Hà Nội");
         profile.setInterest("Book");
         profile.setJob("Worker");
