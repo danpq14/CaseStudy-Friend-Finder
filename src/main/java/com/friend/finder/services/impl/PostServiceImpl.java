@@ -4,9 +4,10 @@ import com.friend.finder.models.Post;
 import com.friend.finder.repositories.PostRepository;
 import com.friend.finder.services.FullService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class PostServiceImpl implements FullService<Post> {
     @Autowired
     private PostRepository postRepository;

@@ -3,11 +3,13 @@ package com.friend.finder.services.impl;
 import com.friend.finder.models.Image;
 import com.friend.finder.repositories.ImageRepository;
 import com.friend.finder.services.FullService;
+import com.friend.finder.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-public class ImageServiceImpl implements FullService<Image> {
+@Service
+public class ImageServiceImpl implements ImageService {
     @Autowired
     private ImageRepository imageRepository;
     @Override

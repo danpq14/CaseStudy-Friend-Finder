@@ -2,12 +2,14 @@ package com.friend.finder.services.impl;
 
 import com.friend.finder.models.Comment;
 import com.friend.finder.repositories.CommentRepository;
+import com.friend.finder.services.CommentService;
 import com.friend.finder.services.FullService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-public class CommentServiceImpl implements FullService<Comment> {
+@Service
+public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
     @Override

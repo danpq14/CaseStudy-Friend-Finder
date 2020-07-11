@@ -4,9 +4,10 @@ import com.friend.finder.models.Timeline;
 import com.friend.finder.repositories.TimelineRepository;
 import com.friend.finder.services.FullService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class TimelineServiceImpl implements FullService<Timeline> {
     @Autowired
     private TimelineRepository timelineRepository;
