@@ -30,4 +30,7 @@ public class Post {
 
     @ManyToMany(mappedBy = "postSet")
     private Set<Newsfeed> newsfeedSet;
+
+    @OneToMany(mappedBy = "post")
+    private Set<Notification> notifications;
 }
