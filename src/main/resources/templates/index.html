@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+		xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -106,21 +107,24 @@
 					<div class="line-divider"></div>
 					<div class="form-wrapper">
 						<p class="signup-text">Signup now and meet awesome people around the world</p>
-						<form action="#">
+						<form th:action="@{/signUp}" method="post"  th:object="${account}">
 							<fieldset class="form-group">
-								<input type="text" class="form-control" id="example-name" placeholder="Enter username">
+								<input type="text" class="form-control" id="example-name" th:field="*{username}">
+								<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="email" class="form-control" id="example-email" placeholder="Enter email">
+								<input type="email" class="form-control" id="example-email" th:field="*{email}">
+								<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="example-password" placeholder="Enter a password">
+								<input type="password" class="form-control" id="example-password" th:field="*{password}">
+								<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 							</fieldset>
+							<p>By signning up you agree to the terms</p>
+							<button class="btn-secondary">Signup</button>
 						</form>
-						<p>By signning up you agree to the terms</p>
-						<button class="btn-secondary">Signup</button>
 					</div>
-					<a href="#">Already have an account?</a>
+					<a href="/login">Already have an account?</a>
 					<img class="form-shadow" src="/static/images/bottom-shadow.png" alt="" />
 				</div><!-- Sign Up Form End -->
 
@@ -156,7 +160,7 @@
 					</div>
 				</div>
 				<h2 class="sub-title">find awesome people like you</h2>
-				<div id="incremental-counter" data-value="101242"></div>
+				<div id="incremental-counter"></div>
 				<p>People Already Signed Up</p>
 				<img src="/static/images/face-map.png" alt="" class="img-responsive face-map slideUp hidden-sm hidden-xs" />
 			</div>

@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
     @Override
@@ -31,5 +32,15 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public void delete(Long id) {
         accountRepository.deleteById(id);
+    }
+
+//    @Override
+//    public int countAccountByUserName() {
+//        return accountRepository.countAccountByUsername();
+//    }
+
+    @Override
+    public Account findAccountByUserName(String username) {
+        return accountRepository.findAccountByUsername(username);
     }
 }
