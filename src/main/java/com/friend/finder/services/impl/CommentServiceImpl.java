@@ -4,9 +4,10 @@ import com.friend.finder.models.Comment;
 import com.friend.finder.repositories.CommentRepository;
 import com.friend.finder.services.FullService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class CommentServiceImpl implements FullService<Comment> {
     @Autowired
     private CommentRepository commentRepository;

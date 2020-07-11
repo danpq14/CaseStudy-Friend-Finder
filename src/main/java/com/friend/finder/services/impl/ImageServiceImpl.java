@@ -4,9 +4,10 @@ import com.friend.finder.models.Image;
 import com.friend.finder.repositories.ImageRepository;
 import com.friend.finder.services.FullService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class ImageServiceImpl implements FullService<Image> {
     @Autowired
     private ImageRepository imageRepository;

@@ -1,5 +1,7 @@
 package com.friend.finder.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Optional;
 
 public interface FullService<T> {
@@ -7,4 +9,5 @@ public interface FullService<T> {
     Optional<T> findById(Long id);
     void save(T t);
     void delete(Long id);
+
 }
