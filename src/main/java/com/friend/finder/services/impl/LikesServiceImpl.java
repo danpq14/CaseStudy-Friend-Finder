@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
 public class LikesServiceImpl implements LikesService {
     @Autowired
     private LikesRepository likesRepository;
+
     @Override
     public Iterable<Likes> findAll() {
         return likesRepository.findAll();
