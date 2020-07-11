@@ -23,8 +23,8 @@ public class DislikeServiceImpl implements DislikesService {
     }
 
     @Override
-    public void save(Dislikes dislikes) {
-        dislikesRepository.save(dislikes);
+    public Dislikes save(Dislikes dislikes) {
+        return dislikesRepository.save(dislikes);
     }
 
     @Override

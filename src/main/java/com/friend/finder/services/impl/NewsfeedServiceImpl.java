@@ -23,8 +23,8 @@ public class NewsfeedServiceImpl implements NewsfeedService {
     }
 
     @Override
-    public void save(Newsfeed newsfeed) {
-        newsfeedRepository.save(newsfeed);
+    public Newsfeed save(Newsfeed newsfeed) {
+        return newsfeedRepository.save(newsfeed);
     }
 
     @Override

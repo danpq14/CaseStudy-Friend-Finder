@@ -24,8 +24,8 @@ public class LikesServiceImpl implements LikesService {
     }
 
     @Override
-    public void save(Likes likes) {
-        likesRepository.save(likes);
+    public Likes save(Likes likes) {
+        return likesRepository.save(likes);
     }
 
     @Override

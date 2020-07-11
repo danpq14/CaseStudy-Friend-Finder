@@ -23,8 +23,8 @@ public class TimelineServiceImpl implements TimelineService {
     }
 
     @Override
-    public void save(Timeline timeline) {
-        timelineRepository.save(timeline);
+    public Timeline save(Timeline timeline) {
+        return timelineRepository.save(timeline);
     }
 
     @Override
