@@ -4,9 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,7 +19,7 @@ public class Account {
     private Long id;
 
     @Column(unique = true)
-    @Size(min=6, max=20)
+    @Size(min = 6, max = 20)
     private String username;
 
     @Size(min = 6)
@@ -28,6 +28,12 @@ public class Account {
     @Column
     @Email
     private String email;
+    @ManyToMany
+    @JoinTable(name = "account_roles",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
+    private List<Role> roles;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id")
@@ -39,14 +45,14 @@ public class Account {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "account_post",
-                joinColumns = @JoinColumn(name = "account_id"),
-                inverseJoinColumns = @JoinColumn(name = "post_id"))
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<Post> posts;
 
-    @ManyToMany(cascade={CascadeType.ALL})
-    @JoinTable(name="account_friend",
-            joinColumns={@JoinColumn(name="account_id")},
-            inverseJoinColumns={@JoinColumn(name="friend_id")})
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "account_friend",
+            joinColumns = {@JoinColumn(name = "account_id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id")})
     private Set<Account> friends = new HashSet<Account>();
 
     @OneToMany(mappedBy = "account")

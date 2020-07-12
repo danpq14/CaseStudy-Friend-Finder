@@ -3,6 +3,7 @@ package com.friend.finder.controllers.normal_controller;
 import com.friend.finder.models.Account;
 import com.friend.finder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,9 +19,6 @@ public class SignUpController {
 
     @Autowired
     AccountService accountService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @PostMapping("/signUp")
     public ModelAndView signUpAccount(@ModelAttribute Account account, @Valid BindingResult bindingResult){
@@ -38,10 +36,31 @@ public class SignUpController {
                 modelAndView.setViewName("index");
                 return modelAndView;
             }
-            accountService.save(account);
-            modelAndView.addObject("message","Sign Up New Account Success ! Please Log in");
+            try {
+                accountService.signUp(account);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            modelAndView.addObject("message", "Sign Up New Account Success ! Please Log in");
+            modelAndView.addObject("account", new Account());
             modelAndView.setViewName("login-page");
             return modelAndView;
         }
     }
+
+    @GetMapping("/login-page")
+    public ModelAndView loginPage() {
+        return new ModelAndView("login-page", "account", new Account());
+    }
+
+    @PostMapping("/login")
+    public UserDetails loginPage(@Valid @ModelAttribute Account account) {
+
+        return (UserDetails) new ModelAndView("timeline-about", "user", accountService.login(account));
+    }
+    @GetMapping("/logout")
+    public String logoutPage(){
+        return "index";
+    }
+
 }
