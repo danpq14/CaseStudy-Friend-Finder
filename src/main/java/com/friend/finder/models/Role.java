@@ -8,16 +8,8 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Role implements GrantedAuthority {
+public class Role {
     @Id
     private Long id;
-    private String role;
-
-    @ManyToMany(mappedBy = "roles")
-    private Set<Account> accounts;
-
-    @Override
-    public String getAuthority() {
-        return this.role;
-    }
+    private String name;
 }

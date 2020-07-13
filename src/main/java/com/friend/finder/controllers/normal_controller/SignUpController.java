@@ -3,8 +3,6 @@ package com.friend.finder.controllers.normal_controller;
 import com.friend.finder.models.Account;
 import com.friend.finder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,7 @@ public class SignUpController {
     AccountService accountService;
 
     @PostMapping("/signUp")
-    public ModelAndView signUpAccount(@ModelAttribute Account account, @Valid BindingResult bindingResult){
+    public ModelAndView signUpAccount(@ModelAttribute Account account, @Valid BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         Account checkAccount = accountService.findAccountByUserName(account.getUsername());
         if (checkAccount != null) {
@@ -29,8 +27,7 @@ public class SignUpController {
             modelAndView.addObject("account", account);
             modelAndView.setViewName("index");
             return modelAndView;
-        }
-        else {
+        } else {
             if (bindingResult.hasFieldErrors()) {
                 modelAndView.addObject("account", account);
                 modelAndView.setViewName("index");
@@ -50,16 +47,11 @@ public class SignUpController {
 
     @GetMapping("/login-page")
     public ModelAndView loginPage() {
-        return new ModelAndView("login-page", "account", new Account());
+        return new ModelAndView("login-page");
     }
 
-    @PostMapping("/login")
-    public UserDetails loginPage(@Valid @ModelAttribute Account account) {
-
-        return (UserDetails) new ModelAndView("timeline-about", "user", accountService.login(account));
-    }
     @GetMapping("/logout")
-    public String logoutPage(){
+    public String logoutPage() {
         return "index";
     }
 

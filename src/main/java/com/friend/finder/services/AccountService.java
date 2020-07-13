@@ -1,8 +1,13 @@
 package com.friend.finder.services;
 
 import com.friend.finder.models.Account;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface AccountService extends FullService<Account> {
+import java.security.Principal;
+import java.util.List;
+
+public interface AccountService extends UserDetailsService {
 
 //    int countAccountByUserName();
 
@@ -11,4 +16,6 @@ public interface AccountService extends FullService<Account> {
     Account signUp(Account account) throws Exception;
 
     Account login(Account account);
+
+    List<Account> search(String keyword, Principal principal);
 }

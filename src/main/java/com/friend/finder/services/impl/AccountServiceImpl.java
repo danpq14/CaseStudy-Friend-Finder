@@ -1,7 +1,6 @@
 package com.friend.finder.services.impl;
 
 import com.friend.finder.models.Account;
-import com.friend.finder.models.Likes;
 import com.friend.finder.models.Role;
 import com.friend.finder.repositories.AccountRepository;
 import com.friend.finder.repositories.RoleRepository;
@@ -11,43 +10,25 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
+import java.security.Principal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class AccountServiceImpl implements AccountService, UserDetailsService {
+public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
     RoleRepository roleRepository;
 
-    @Override
-    public Iterable<Account> findAll() {
-        return accountRepository.findAll();
-    }
-
-    @Override
-    public Optional<Account> findById(Long id) {
-        return accountRepository.findById(id);
-    }
-
-    @Override
-    public Account save(Account account) {
-        return accountRepository.save(account);
-    }
-
-
-    @Override
-    public void delete(Long id) {
-        accountRepository.deleteById(id);
-    }
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
 //    @Override
 //    public int countAccountByUserName() {
@@ -62,12 +43,10 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     @Override
     public Account signUp(Account account) throws Exception {
         Optional<Role> roleOpt = roleRepository.findById(1L);
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
 
         if (roleOpt.isPresent()) {
-            Role role = roleOpt.get();
-            List<Role> roles = new ArrayList<>();
-            roles.add(role);
-            account.setRoles(roles);
+            account.setRoles(Arrays.asList(roleOpt.get()));
         } else {
             throw new Exception("Not Found");
         }
@@ -79,19 +58,38 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
         UserDetails user = this.loadUserByUsername(account.getUsername());
         account.setPassword(user.getPassword());
         account.setUsername(user.getUsername());
-        account.setRoles((List<Role>) user.getAuthorities());
+        roleRepository.findById(1L).ifPresent(role -> account.setRoles(Arrays.asList(role)));
         return account;
+    }
+
+    @Override
+    @Transactional
+    public List<Account> search(String keyword, Principal principal) {
+        Account account = findAccountByUserName(principal.getName());
+
+        List<Account> accounts = accountRepository.findAllByUsernameLike(keyword, account.getId());
+        if (!accounts.isEmpty()) {
+            account.setFriends(accounts);
+            accountRepository.save(account);
+        }
+
+        return accounts;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findAccountByUsername(username);
-        List<GrantedAuthority> roles = new ArrayList<>();
-        List<Role> rolesSet = account.getRoles();
-        for (Role r : rolesSet) {
-            roles.add(new SimpleGrantedAuthority(r.getRole()));
+        if (account == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
         }
-        User user = new User(account.getUsername(), account.getPassword(), roles);
-        return user;
+        return new org.springframework.security.core.userdetails.User(account.getUsername(),
+                account.getPassword(),
+                mapRolesToAuthorities(account.getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
     }
 }

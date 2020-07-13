@@ -106,7 +106,7 @@
             <div class="line-divider"></div>
             <div class="form-wrapper">
                 <p class="signup-text"><span th:text="${message}"></span></p>
-                <form action="/login" method="post" th:object="${account}">
+                <form th:action="@{/check-login}" method="post">
                     <fieldset class="form-group">
                         <input type="text" class="form-control" id="example-name" name="username" placeholder="UserName">
                     </fieldset>
@@ -114,7 +114,7 @@
                         <input type="password" class="form-control" id="example-password" name="password" placeholder="Password">
                     </fieldset>
                     <fieldset>
-                        <button class="btn-secondary">Login</button>
+                        <button type="submit" class="btn-secondary">Login</button>
                     </fieldset>
 
                     <fieldset>

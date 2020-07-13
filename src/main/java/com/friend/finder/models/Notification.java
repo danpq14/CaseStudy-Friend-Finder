@@ -11,7 +11,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Bình luận/Like/DisLike
+    //Bình luận/Like/DisLike/
     @Column
     private String type;
 
