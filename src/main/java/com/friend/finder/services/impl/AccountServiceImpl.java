@@ -58,6 +58,7 @@ public class AccountServiceImpl implements AccountService {
         account.setNewsfeed(newsfeedRepository.save(new Newsfeed()));
         account.setProfile(profileRepository.save(new Profile()));
         account.setTimeline(timelineRepository.save(new Timeline()));
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
         return   accountRepository.save(account);
     }
 
