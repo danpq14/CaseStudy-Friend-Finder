@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -166,7 +166,7 @@
                             <div class="col-md-7 col-sm-7">
                                 <div class="form-group">
                                     <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-md"/>
-                                    <textarea name="texts" id="postxx" cols="30" rows="1" class="form-control"
+                                    <textarea name="texts" id="post-content" cols="30" rows="1" class="form-control"
                                               placeholder="Write what you wish"></textarea>
                                 </div>
                             </div>
@@ -178,11 +178,49 @@
                                         <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
                                         <li><a href="#"><i class="ion-map"></i></a></li>
                                     </ul>
-                                    <button class="btn btn-primary pull-right" onclick="addPost()">Publish</button>
+                                    <button onclick="addMyPost()" class="btn btn-primary pull-right">Publish</button>
                                 </div>
                             </div>
                         </div>
                     </div><!-- Post Create Box End-->
+                    <script>
+                        function addMyPost() {
+                            let content = document.getElementById("post-content").value;
+
+                            let post = {
+                                content : content
+                            };
+
+                            $.ajax({
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                url: 'http://localhost:8080/api/myPost',
+                                type: 'POST',
+                                data: JSON.stringify(post),
+                                success: successHandler,
+                                error: errorHandler
+                            });
+
+                        }
+
+                        function successHandler() {
+                            $.ajax({
+                                url: 'http://localhost:8080/api/smartphones',
+                                type: 'GET',
+                                success: showMyPost()
+                            });
+                        }
+                        function showMyPost() {
+
+                        }
+
+                        function errorHandler() {
+                            alert('Them khong duoc!');
+                        }
+                    </script>
+
 
                     <!-- Post Content
                     ================================================= -->
@@ -465,28 +503,5 @@
 <script src="/static/js/jquery.scrollbar.min.js"></script>
 <script src="/static/js/script.js"></script>
 <!--  ===================================================-->
-<script>
-    function addPost() {
-      let postContent = $("#postxx").val();
-
-      let post = {
-        "content": postContent
-        // "blog":{
-        //     id: id
-        // }
-      };
-      $.ajax({
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        url: 'http://localhost:8080/api/post/add',
-        type: 'POST',
-        data: JSON.stringify(post),
-        success: alert("DOne"),
-        error: alert("Fail")
-      });
-    }
-</script>
 </body>
 </html>

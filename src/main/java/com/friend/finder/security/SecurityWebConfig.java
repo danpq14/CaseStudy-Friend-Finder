@@ -49,7 +49,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/timeline-about").hasRole("USER")
                 .and().authorizeRequests().antMatchers("/chat").hasRole("USER")
                 .and().formLogin()
-                .loginPage("/login-page")
+                .loginPage("/login")
                 .loginProcessingUrl("/check-login")
                 .defaultSuccessUrl("/timeline").permitAll()
                 .and().logout().logoutUrl("/logout").and().csrf().disable().cors();

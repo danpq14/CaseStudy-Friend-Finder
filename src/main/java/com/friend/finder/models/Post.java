@@ -26,11 +26,12 @@ public class Post {
 //    @OneToMany
 //    private Set<Dislikes> dislikes;
 //
-//    private Timestamp postTime = new Timestamp(System.currentTimeMillis());
+    private Timestamp postTime = new Timestamp(System.currentTimeMillis());
 //
 //    @ManyToMany(mappedBy = "postSet")
 //    private Set<Newsfeed> newsfeedSet;
 //
 //    @OneToMany(mappedBy = "post")
 //    private Set<Notification> notifications;
+
 }
