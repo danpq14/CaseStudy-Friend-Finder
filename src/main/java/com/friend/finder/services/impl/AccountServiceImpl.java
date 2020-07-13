@@ -1,7 +1,9 @@
 package com.friend.finder.services.impl;
 
-import com.friend.finder.models.*;
-import com.friend.finder.repositories.*;
+import com.friend.finder.models.Account;
+import com.friend.finder.models.Role;
+import com.friend.finder.repositories.AccountRepository;
+import com.friend.finder.repositories.RoleRepository;
 import com.friend.finder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

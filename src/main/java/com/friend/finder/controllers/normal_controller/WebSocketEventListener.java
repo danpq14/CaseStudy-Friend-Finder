@@ -1,4 +1,4 @@
-package websocketdemo.websocketdemo.controller;
+package com.friend.finder.controllers.normal_controller;
 
 import com.friend.finder.models.ChatMessage;
 import org.slf4j.Logger;

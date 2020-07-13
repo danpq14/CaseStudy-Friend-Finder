@@ -19,40 +19,16 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccountService accountService;
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                .antMatchers(
-//                        "/login",
-//                        "/login-page",
-//                        "/signUp-page",
-//                        "/signUp",
-//                        "/").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login-page")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .invalidateHttpSession(true)
-//                .clearAuthentication(true)
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/login?logout")
-//                .permitAll();
-//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login", "/signUp").permitAll()
+        http.authorizeRequests().antMatchers("/login", "/signUp","/static/**","/index").permitAll()
                 .and().authorizeRequests().antMatchers("/timeline-about").hasRole("USER")
                 .and().authorizeRequests().antMatchers("/chat").hasRole("USER")
                 .and().formLogin()
                 .loginPage("/login-page")
-                .loginProcessingUrl("/check-login")
-                .defaultSuccessUrl("/timeline-about").permitAll()
-                .and().logout().logoutUrl("/logout");
+                .defaultSuccessUrl("/newsfeed").permitAll()
+                .and().logout().logoutUrl("/logout").and().csrf().disable().cors();
     }
 
     @Bean
