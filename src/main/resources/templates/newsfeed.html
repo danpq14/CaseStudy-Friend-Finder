@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th= "http://www.thymeleaf.org">
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -185,11 +185,52 @@
                   </div>
                   <div class="post-comment">
                     <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                    <input type="text" class="form-control" placeholder="Post a comment">
+<!--                    <form th:action="@{/myComment/create}" method="post" th:object="${comment}">-->
+                    <form th:object="${comment}">
+                      <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">
+
+                      <input type="submit" value="Send" onclick="addComment()">
+<!--                      <button type="submit">Save</button>-->
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
+                  <script>
+                    function addComment() {
+                      let content = document.getElementById("content").value;
+                      let comment = {
+                        content : content
+                      };
+                      $.ajax({
+                        headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                        },
+                        url: 'http://localhost:8080/myComment/create',
+                        type: 'POST',
+                        data: JSON.stringify(comment),
+                        success: sucessHandle,
+                        error: errorHandle
+                      });
+                    }
+                    function sucessHandle() {
+                      $.ajax({
+                        url: 'http://localhost:8080/myComment/create',
+                        type: 'GET',
+                        success: showComment
+                      });
+                    }
+                    function errorHandle() {
+                      alert("not comment successful");
+
+                    }
+                    function showComment(response) {
+                      for(let i=0;i<response.length; i++){
+                        '<p th:text="${' + response[i] + '.name}">';
+                      }
+                    }
+                  </script>
 
             <!-- Post Content
             ================================================= -->
