@@ -45,7 +45,7 @@ public class SignUpController {
         }
     }
 
-    @GetMapping("/login-page")
+    @GetMapping("/login")
     public ModelAndView loginPage() {
         return new ModelAndView("login-page");
     }

@@ -28,16 +28,16 @@ public class Profile {
     @Column(columnDefinition = "TEXT")
     private String information;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'no' ")
     private String firstName;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'no' ")
     private String lastName;
 
-    @Column(nullable = false, columnDefinition = "varchar(255) default '' ")
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'no' ")
     private String phone;
 
-    @Column(nullable = true,columnDefinition = "varchar(255) default '' ")
+    @Column(columnDefinition = "varchar(255) default 'no' ")
     private String birthDay;
 
     @Column(columnDefinition = "varchar(1000) default 'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png' ")
@@ -50,4 +50,10 @@ public class Profile {
 
     @OneToOne(mappedBy = "profile")
     private Account account;
+
+    public Profile() {
+        this.firstName = "";
+        this.lastName = "";
+        this.phone = "";
+    }
 }

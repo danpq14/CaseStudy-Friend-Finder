@@ -60,7 +60,10 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private Set<Dislikes> dislikes;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "timeline_id")
+    private Timeline timeline;
 //    @ManyToMany(mappedBy="friends")
 //    private Set<Account> teammates = new HashSet<Account>();
-
 }

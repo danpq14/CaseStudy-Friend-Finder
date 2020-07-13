@@ -13,7 +13,7 @@ public class Timeline {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "timeline")
     private Account account;
 
 //    @OneToMany
