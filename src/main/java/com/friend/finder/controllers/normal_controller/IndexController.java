@@ -20,4 +20,8 @@ public class IndexController {
         model.addAttribute("account", account);
         return "index";
     }
+    @GetMapping("/timeline")
+    public String getTimeline(){
+        return "timeline";
+    }
 }

@@ -19,7 +19,7 @@ public class Comment {
     @Column (columnDefinition = "TEXT")
     private String content;
 
-    private Timestamp postTime;
+    private Timestamp postTime = new Timestamp(System.currentTimeMillis());
 
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinTable(name = "post_comment",
