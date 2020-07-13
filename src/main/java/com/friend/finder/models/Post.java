@@ -14,23 +14,23 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Account account;
+//    @ManyToOne
+//    private Account account;
 
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @OneToMany(mappedBy = "post")
-    private Set<Likes> likes;
-
-    @OneToMany
-    private Set<Dislikes> dislikes;
-
-    private Timestamp postTime;
-
-    @ManyToMany(mappedBy = "postSet")
-    private Set<Newsfeed> newsfeedSet;
-
-    @OneToMany(mappedBy = "post")
-    private Set<Notification> notifications;
+//    @OneToMany(mappedBy = "post")
+//    private Set<Likes> likes;
+//
+//    @OneToMany
+//    private Set<Dislikes> dislikes;
+//
+//    private Timestamp postTime = new Timestamp(System.currentTimeMillis());
+//
+//    @ManyToMany(mappedBy = "postSet")
+//    private Set<Newsfeed> newsfeedSet;
+//
+//    @OneToMany(mappedBy = "post")
+//    private Set<Notification> notifications;
 }
