@@ -21,4 +21,10 @@ public class Comment {
 
     private Timestamp postTime;
 
+    @ManyToOne(cascade =  CascadeType.ALL)
+    @JoinTable(name = "post_comment",
+                joinColumns = @JoinColumn(name = "comment_id"),
+                inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private Post post;
+
 }

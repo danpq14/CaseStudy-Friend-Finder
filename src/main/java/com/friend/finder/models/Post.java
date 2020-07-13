@@ -33,4 +33,7 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private Set<Notification> notifications;
+
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> comments;
 }
