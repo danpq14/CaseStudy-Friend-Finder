@@ -14,6 +14,11 @@ public class IndexController {
     AccountService accountService;
 
     @GetMapping("/")
+    public String getIndex(){
+        return "redirect:/index";
+    }
+
+    @GetMapping("/index")
     public String getIndexPage(Model model){
         Account account = new Account();
 
