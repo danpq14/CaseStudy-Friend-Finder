@@ -75,6 +75,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findAccountByUsername(username);
         if (account == null) {

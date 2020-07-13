@@ -18,4 +18,5 @@ public interface AccountService extends UserDetailsService {
     Account login(Account account);
 
     List<Account> search(String keyword, Principal principal);
+    Account save(Account account);
 }
