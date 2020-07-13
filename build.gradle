@@ -19,6 +19,12 @@ repositories {
 }
 
 dependencies {
+
+    // https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api
+//    providedCompile group: 'javax.websocket', name: 'javax.websocket-api', version: '1.1'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
