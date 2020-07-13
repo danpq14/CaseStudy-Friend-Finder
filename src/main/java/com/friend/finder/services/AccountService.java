@@ -19,4 +19,5 @@ public interface AccountService extends UserDetailsService {
 
     List<Account> search(String keyword, Principal principal);
     Account save(Account account);
+    Boolean checkFriend(Account account, Account account2);
 }
