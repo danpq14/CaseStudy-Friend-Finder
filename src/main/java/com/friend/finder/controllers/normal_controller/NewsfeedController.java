@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class NewsfeedController {
 
-    @GetMapping("/newsfeed")
+    @GetMapping("/app/newsfeed")
     public String getNewsfeed() {
-        return "newsfeed";
+        return "contact";
     }
 }

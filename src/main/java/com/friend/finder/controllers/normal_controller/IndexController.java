@@ -14,13 +14,18 @@ public class IndexController {
     AccountService accountService;
 
     @GetMapping("/")
+    public String getIndex(){
+        return "redirect:/index";
+    }
+
+    @GetMapping("/index")
     public String getIndexPage(Model model){
         Account account = new Account();
 
         model.addAttribute("account", account);
         return "index";
     }
-    @GetMapping("/timeline")
+    @GetMapping("/app/timeline")
     public String getTimeline(){
         return "timeline";
     }

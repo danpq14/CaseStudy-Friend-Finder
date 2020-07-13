@@ -6,10 +6,7 @@ import com.friend.finder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -25,25 +22,26 @@ public class ProfileController {
         Account account = accountService.findAccountByUserName(principal.getName());
         return account;
     }
-    @GetMapping("/timeline-about")
+    @GetMapping("/app/profile")
     public String showTimelinePage(Model model, @ModelAttribute("account") Account account){
         Profile profile = account.getProfile();
         model.addAttribute("profile",profile);
-        return "timeline-about";
+        return "profile";
     }
 
-    @GetMapping("/timeline-edit")
+    @GetMapping("/app/profile-edit")
     public ModelAndView editInfoPage(@ModelAttribute("account") Account account){
-        ModelAndView modelAndView = new ModelAndView("edit-timeline-about");
+        ModelAndView modelAndView = new ModelAndView("profile-editing");
         Profile profile = account.getProfile();
         modelAndView.addObject("profile",profile);
         return modelAndView;
     }
-    @PostMapping("/timeline-edit")
+    @PostMapping("/app/profile-edit")
     public ModelAndView saveProfile(@ModelAttribute Profile profiles,@ModelAttribute("account") Account account){
         account.setProfile(profiles);
         Profile profile = account.getProfile();
-        ModelAndView modelAndView = new ModelAndView("timeline-about");
+        accountService.save(account);
+        ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("profile",profile);
         return modelAndView;
     }

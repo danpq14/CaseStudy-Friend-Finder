@@ -24,9 +24,6 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
@@ -37,10 +34,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private TimelineRepository timelineRepository;
-//    @Override
-//    public int countAccountByUserName() {
-//        return accountRepository.countAccountByUsername();
-//    }
+
 
     @Override
     public Account findAccountByUserName(String username) {
@@ -49,12 +43,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account signUp(Account account) throws Exception {
-        Role role = new Role();
-        role.setId(1L);
-        role.setName("ROLE_USER");
-        roleRepository.save(role);
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(role);
+
         account.setNewsfeed(newsfeedRepository.save(new Newsfeed()));
         account.setProfile(profileRepository.save(new Profile()));
         account.setTimeline(timelineRepository.save(new Timeline()));
@@ -67,7 +56,6 @@ public class AccountServiceImpl implements AccountService {
         UserDetails user = this.loadUserByUsername(account.getUsername());
         account.setPassword(user.getPassword());
         account.setUsername(user.getUsername());
-        roleRepository.findById(1L).ifPresent(role -> account.setRoles(Arrays.asList(role)));
         return account;
     }
 
@@ -87,19 +75,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findAccountByUsername(username);
         if (account == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(account.getUsername(),
-                account.getPassword(),
-                mapRolesToAuthorities(account.getRoles()));
+
+        List<GrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority("ROLE_USER"));
+        return new User(account.getUsername(), account.getPassword(), list);
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
-    }
 }

@@ -45,13 +45,13 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login", "/signUp").permitAll()
-                .and().authorizeRequests().antMatchers("/timeline-about").hasRole("USER")
-                .and().authorizeRequests().antMatchers("/chat").hasRole("USER")
+
+        http.authorizeRequests()
+                .and().authorizeRequests().antMatchers("/app/**").authenticated()
                 .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/check-login")
-                .defaultSuccessUrl("/timeline-about")
+                .defaultSuccessUrl("/app/newsfeed")
                 .and().logout().logoutUrl("/logout");
     }
 
