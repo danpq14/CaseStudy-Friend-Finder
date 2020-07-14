@@ -1,51 +1,41 @@
 package com.friend.finder.controllers.normal_controller;
 
-import com.friend.finder.models.*;
-import com.friend.finder.services.*;
+import com.friend.finder.models.Account;
+import com.friend.finder.models.Post;
+import com.friend.finder.models.Profile;
+import com.friend.finder.services.AccountService;
+import com.friend.finder.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
 @Controller
 public class TimelineController {
-
     @Autowired
     private AccountService accountService;
-
-    @Autowired
-    private NewsfeedService newsfeedService;
-
     @Autowired
     private PostService postService;
 
-    @Autowired
-    private ProfileService profileService;
-
-    @Autowired
-    private TimelineService timelineService;
-
     @GetMapping("/app/timeline")
-    public String getTimeline(Principal principal, Model model, @PageableDefault(size = 8) Pageable pageable) {
-        String username = principal.getName();
-        Account account = accountService.findAccountByUserName(username);
+    public ModelAndView getTimeline(Principal principal, @PageableDefault(size = 5)Pageable pageable) {
+        Account account = accountService.findAccountByUserName(principal.getName());
         Profile profile = account.getProfile();
-        Timeline timeline = account.getTimeline();
-        Newsfeed newsfeed = newsfeedService.getNewsfeedByAccount(account);
-        Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
-        model.addAttribute("posts", posts);
-        model.addAttribute("profile", profile);
+        ModelAndView modelAndView = new ModelAndView("timeline");
+        Page<Post> postList = postService.getPostsByAccountOrderByPostTime(account,pageable);
+        modelAndView.addObject("account",account);
+        modelAndView.addObject("postList",postList);
         if (isNewUser(profile)){
-            return "profile-editing";
+            modelAndView.setViewName("profile-editing");
+            return modelAndView;
         }
-        return "timeline";
+        return modelAndView;
     }
-
     public boolean isNewUser(Profile profile){
         String fullName = profile.getFirstName() + " " + profile.getLastName();
         if (fullName.equalsIgnoreCase("New User")) {

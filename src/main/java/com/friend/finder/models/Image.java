@@ -15,4 +15,7 @@ public class Image {
 
     private String href;
 
+    @OneToOne(mappedBy = "images")
+    private Post post;
+
 }
