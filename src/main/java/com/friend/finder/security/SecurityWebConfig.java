@@ -51,8 +51,8 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/check-login")
-                .defaultSuccessUrl("/app/profile")
-                .and().logout().logoutUrl("/logout");
+                .defaultSuccessUrl("/app/newsfeed")
+                .and().logout().logoutUrl("/logout").and().csrf().disable().cors();;
     }
 
     @Bean
