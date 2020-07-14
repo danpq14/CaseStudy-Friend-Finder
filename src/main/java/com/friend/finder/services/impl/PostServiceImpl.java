@@ -1,10 +1,12 @@
 package com.friend.finder.services.impl;
 
+import com.friend.finder.models.Newsfeed;
 import com.friend.finder.models.Post;
 import com.friend.finder.repositories.PostRepository;
 import com.friend.finder.services.FullService;
 import com.friend.finder.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,5 +32,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(Long id) {
         postRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Post> getPostsByNewsfeedSetOrderByPostTimeDesc(Newsfeed newsfeed) {
+        return postRepository.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed);
     }
 }
