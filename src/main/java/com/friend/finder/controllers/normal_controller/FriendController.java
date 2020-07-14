@@ -42,8 +42,8 @@ public class FriendController {
            }else noneFriends.add(ac);
        }
        modelAndView.addObject("account",account);
-       modelAndView.addObject("friend",friends);
-       modelAndView.addObject("noneFriend",noneFriends);
+       modelAndView.addObject("friends",friends);
+       modelAndView.addObject("noneFriends",noneFriends);
        return modelAndView;
     }
 }
