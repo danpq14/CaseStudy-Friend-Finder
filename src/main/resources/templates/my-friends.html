@@ -207,7 +207,7 @@
                                     <div class="card-info">
                                         <img th:src="*{fr.getProfile().getAvatar()}" alt="user" class="profile-photo-lg"/>
                                         <div class="friend-info">
-                                            <h5><a th:href="@{/app/timeline/{id}(id=*{fr.id})}" class="profile-link"
+                                            <h5><a th:href="@{/app/timeline/{username}(username=*{fr.username})}" class="profile-link"
                                                    th:text="*{fr.getProfile().getFirstName()+' '+fr.getProfile().getLastName()}"></a>
                                             </h5>
                                             <p th:text="*{fr.getProfile().getJob()}"></p>

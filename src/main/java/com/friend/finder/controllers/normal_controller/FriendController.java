@@ -5,6 +5,7 @@ import com.friend.finder.models.FriendRequest;
 import com.friend.finder.models.Profile;
 import com.friend.finder.services.AccountService;
 import com.friend.finder.services.FriendRequestService;
+import com.friend.finder.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.*;
@@ -32,19 +33,28 @@ public class FriendController {
     @Autowired
     private FriendRequestService friendRequestService;
 
+    @Autowired
+    private ProfileService profileService;
+
     @PostMapping("/app/search-friend")
     public ModelAndView addFriend(@ModelAttribute("username") String username, Principal principal){
-        List<Account> resultList = accountService.search(username,principal);
+        List<Profile> profileList = profileService.findAllByFirstNameContainingOrLastNameContaining(username, username);
+        List<Account> resultList = new ArrayList<>();
+        if (!profileList.isEmpty() && profileList != null) {
+            for (Profile profile : profileList) {
+                resultList.add(profile.getAccount());
+            }
+        }
+
         List<Account> friends = new ArrayList<>();
         List<Account> noneFriends = new ArrayList<>();
 
         Account currentAccount = accountService.findAccountByUserName(principal.getName());
         ModelAndView modelAndView = new ModelAndView("friends-searching");
-        for(Account acc : resultList){
-           if(accountService.checkFriend(currentAccount,acc)){
-               friends.add(acc);
-           }
-           else noneFriends.add(acc);
+        for (int i=0; i<resultList.size(); i++) {
+            boolean isFriend = accountService.checkFriend(currentAccount, resultList.get(i));
+            if (isFriend) friends.add(resultList.get(i));
+            else noneFriends.add(resultList.get(i));
         }
         modelAndView.addObject("account",currentAccount);
         modelAndView.addObject("friends",friends);

@@ -16,4 +16,6 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, L
 
      @Query("select ac from Account ac where ac.username LIKE CONCAT('%',LOWER(?1) ,'%') and ac.id <> ?2")
      List<Account> findAllByUsernameLike(String keyword, Long id);
+
+
 }
