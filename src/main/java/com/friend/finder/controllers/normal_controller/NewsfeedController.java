@@ -35,26 +35,17 @@ public class NewsfeedController {
     @Autowired
     private ProfileService profileService;
 
-    @GetMapping("/app/newsfeed")
-    public String getNewsfeed(Principal principal, Model model, @PageableDefault(size = 8)Pageable pageable) {
-        String username = principal.getName();
-        Account account = accountService.findAccountByUserName(username);
-        Profile profile = account.getProfile();
-        Newsfeed newsfeed = newsfeedService.getNewsfeedByAccount(account);
-        Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
-        model.addAttribute("posts", posts);
-        model.addAttribute("profile", profile);
-        if (isNewUser(profile)){
-            return "profile-editing";
-        }
-        return "newsfeed";
-    }
+//    @GetMapping("/app/newsfeed")
+//    public String getNewsfeed(Principal principal, Model model, @PageableDefault(size = 8)Pageable pageable) {
+//        String username = principal.getName();
+//        Account account = accountService.findAccountByUserName(username);
+//        Profile profile = account.getProfile();
+//        Newsfeed newsfeed = newsfeedService.getNewsfeedByAccount(account);
+//        Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
+//        model.addAttribute("posts", posts);
+//        model.addAttribute("profile", profile);
+//
+//        return "newsfeed";
+//    }
 
-    public boolean isNewUser(Profile profile){
-        String fullName = profile.getFirstName() + " " + profile.getLastName();
-        if (fullName.equalsIgnoreCase("New User")) {
-            return true;
-        }
-        return false;
-    }
 }
