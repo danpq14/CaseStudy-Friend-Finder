@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin(origins = {"*"})
 @Controller
-@RequestMapping("/post")
+@RequestMapping("app/post")
 public class PostController {
     @Autowired
     private PostService postService;
@@ -22,9 +22,11 @@ public class PostController {
     private CommentService commentService;
     @GetMapping("")
     public ModelAndView showNewsFeed(){
+        Iterable<Post> listPost = postService.findAll();
         ModelAndView mv = new ModelAndView("newsfeed");
         mv.addObject("post", new Post());
         mv.addObject("comment", new Comment());
+        mv.addObject("listPost", listPost);
         return mv;
     }
 }

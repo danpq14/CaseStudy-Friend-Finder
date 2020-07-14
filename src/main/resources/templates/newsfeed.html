@@ -131,7 +131,7 @@
             <!-- Post Create Box
             ================================================= -->
             <div class="create-post">
-              <form action="/post/add" th:object="${post}">
+              <form action="app/post/add" th:object="${post}">
                 <div class="row">
                   <div class="col-md-7 col-sm-7">
                     <div class="form-group">
@@ -147,7 +147,7 @@
                         <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
                         <li><a href="#"><i class="ion-map"></i></a></li>
                       </ul>
-                      <input type="button" class="btn btn-primary pull-right" onclick="addPost()" >Publish</input>
+                      <input type="button" class="btn btn-primary pull-right" onclick="addPost()" value="Publish"></input>
                     </div>
                   </div>
                 </div>
@@ -164,13 +164,12 @@
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                   },
-                  url: 'http://localhost:8090/post/create',
+                  url: 'http://localhost:6969/app/post/create',
                   type: 'POST',
                   data: JSON.stringify(post),
                   success: sucessHandlePost(),
-                  error: errorHandlePost()
+                  // error: errorHandlePost()
                 });
-
               }
               // function errorHandlePost() {
               //   alert("not post successful");
@@ -183,7 +182,15 @@
               //   alert("not successful");
               //
               // }
-              function sucessHandlePost(response) {
+              function sucessHandlePost() {
+                // $.ajax({
+                //   url: 'http://localhost:6969/app/post"',
+                //   type: 'GET',
+                //   success: showAllPost,
+                // });
+                alert("success")
+              }
+                function showAllPost(response){
                 let content =
                         "            <div class=\"post-content\">\n" +
                         "              <img src=\"/static/images/post-/static/images/1.jpg\" alt=\"post-image\" class=\"img-responsive post-image\" />\n" +
@@ -200,9 +207,12 @@
                         "                  </div>\n" +
                         "                  <div class=\"line-divider\"></div>\n" +
                         "                  <div class=\"post-text\">\n" +
-                        "                    <p>"+
-                        getPostInfomation(response) +
-                        "</p>\n" +
+                        "                    <p>";
+                        for(let i=0; i< response.length; i++){
+                          content += getPostInfomation(response[i])
+                        }
+
+                        content+= "</p>\n" +
                         "                  </div>\n" +
                         "                  <div class=\"line-divider\"></div>\n" +
                         "                   <div class=\"post-comment\">\n" +
@@ -288,7 +298,7 @@
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        url: 'http://localhost:8090/myComment/create',
+                        url: 'http://localhost:6969/myComment/create',
                         type: 'POST',
                         data: JSON.stringify(comment),
                         success: sucessHandle(),
@@ -302,7 +312,7 @@
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        url: 'http://localhost:8090/myComment/show',
+                        url: 'http://localhost:6969/myComment/show',
                         type: 'GET',
                         success: sucessHandleShow,
                         error: errorHandleShow
@@ -377,7 +387,7 @@
               </div>
             </div>
             <div id = "testPost">
-
+              <h1>Long</h1>
             </div>
 
             <!-- Post Content

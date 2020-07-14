@@ -13,7 +13,7 @@ import java.security.Principal;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/app/post")
 public class PostControllerAPI {
     @Autowired
     PostService postService;
@@ -23,7 +23,7 @@ public class PostControllerAPI {
     ProfileService profileService;
     @Autowired
     NewsfeedService newsfeedService;
-    @PostMapping("create")
+    @PostMapping("/create")
     public void createPost(@RequestBody Post post, Principal principal){
         String username = principal.getName();
         Account account = accountService.findAccountByUserName(username);

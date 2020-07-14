@@ -1,5 +1,6 @@
 package com.friend.finder.repositories;
 
+import com.friend.finder.models.Account;
 import com.friend.finder.models.Newsfeed;
 import com.friend.finder.models.Post;
 import org.springframework.data.domain.Page;
