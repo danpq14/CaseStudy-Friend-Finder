@@ -199,42 +199,29 @@
                 ================================================= -->
                 <div class="friend-list">
                     <div class="row">
-                        <th:block th:if="${friends.size()!=0}">
-                            <div class="col-md-6 col-sm-6" th:each="friend:${friends}">
-                                <div class="friend-card">
-                                    <img th:src="${friend.profile.cover}" alt="profile-cover"
-                                         class="img-responsive cover"/>
-                                    <div class="card-info">
-                                        <img th:src="${friend.profile.avatar}" alt="user" class="profile-photo-lg"/>
-                                        <div class="friend-info">
-                                            <a href="#" class="pull-right text-green">Profile</a>
-                                            <h5><a href="timeline.html" class="profile-link"
-                                                   th:text="${friend.profile.firstName+' '+friend.profile.lastName}"></a>
-                                            </h5>
-                                            <p th:text="${friend.profile.job}"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </th:block>
-                        <th:block th:each="nonFr:${noneFriends}">
+                        <th:block th:each="fr:${list}">
                             <div class="col-md-6 col-sm-6">
                                 <div class="friend-card">
-                                    <img th:src="${nonFr.profile.cover}" alt="profile-cover"
+                                    <img th:src="*{fr.getProfile().getCover()}" alt="profile-cover"
                                          class="img-responsive cover"/>
                                     <div class="card-info">
-                                        <img th:src="${nonFr.profile.avatar}" alt="user" class="profile-photo-lg"/>
+                                        <img th:src="*{fr.getProfile().getAvatar()}" alt="user" class="profile-photo-lg"/>
                                         <div class="friend-info">
-                                            <a th:onclick="'javascript:sendFriendRequest(\''+ ${nonFr.id} +'\');'" class="pull-right text-green"><p th:id="${nonFr.id}">Add Friend</p></a>
-                                            <h5><a href="timeline.html" class="profile-link"
-                                                   th:text="${nonFr.profile.firstName+' '+nonFr.profile.lastName}"></a>
+                                            <h5><a th:href="@{/app/timeline/{id}(id=*{fr.id})}" class="profile-link"
+                                                   th:text="*{fr.getProfile().getFirstName()+' '+fr.getProfile().getLastName()}"></a>
                                             </h5>
-                                            <p th:text="${nonFr.profile.job}"></p>
+                                            <p th:text="*{fr.getProfile().getJob()}"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </th:block>
+                        <div>
+                            <a th:href="@{'/list'(page=${list.number -1})}" th:if="${list.hasPrevious()}">Previous</a>
+                            <span th:text="${list.number +1}"></span>/<span th:text="${list.totalPages}"></span>
+                            <a th:href="@{'/list'(page=${list.number+1})}" th:if="${list.hasNext()}">Next</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -360,24 +347,7 @@
 
 <!-- Scripts
 ================================================= -->
-<script>
-    function sendFriendRequest(id) {
-        $.ajax({
-            headers: {
-                'Accept' : 'appilication/json',
-                'Content-Type' : 'appilication/json'
-            },
-            url : "http://localhost:8080/app/add-friend/"+ id,
-            type : "POST",
-            success : addFriendSuccess(id)
-        })
-    }
 
-    function addFriendSuccess(id) {
-        document.getElementById(id).innerHTML = "Waiting to Response"
-    }
-
-</script>
 <script src="/static/js/jquery-3.1.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/jquery.sticky-kit.min.js"></script>

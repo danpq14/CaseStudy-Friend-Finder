@@ -2,10 +2,15 @@ package com.friend.finder.controllers.normal_controller;
 
 import com.friend.finder.models.Account;
 import com.friend.finder.models.FriendRequest;
+import com.friend.finder.models.Profile;
 import com.friend.finder.services.AccountService;
 import com.friend.finder.services.FriendRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.*;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,4 +52,16 @@ public class FriendController {
         return modelAndView;
     }
 
+
+    @GetMapping("/app/my-friends")
+    public ModelAndView getFriendsList(Principal principal, @PageableDefault(size = 8) Pageable pageable){
+        Account account = accountService.findAccountByUserName(principal.getName());
+        List<Account> friends = account.getFriends();
+        Page<Account> friendList = new PageImpl<>(friends, pageable, friends.size());
+
+        ModelAndView modelAndView = new ModelAndView("my-friends");
+        modelAndView.addObject("account", account);
+        modelAndView.addObject("list", friendList);
+        return modelAndView;
+    }
 }

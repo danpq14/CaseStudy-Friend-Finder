@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
@@ -52,5 +53,10 @@ public class TimelineController {
             return true;
         }
         return false;
+    }
+
+    @GetMapping("/app/timeline/{id}")
+    public ModelAndView viewTimeline(){
+        return null;
     }
 }
