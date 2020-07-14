@@ -199,20 +199,22 @@
                 <div class="friend-list">
                     <div class="row">
                         <th:block th:if="${friends.size()!=0}">
-                        <div class="col-md-6 col-sm-6" th:each="friend:${friends}">
-                            <div class="friend-card">
-                                <img th:src="${friend.profile.cover}" alt="profile-cover"
-                                     class="img-responsive cover"/>
-                                <div class="card-info">
-                                    <img th:src="${friend.profile.avatar}" alt="user" class="profile-photo-lg"/>
-                                    <div class="friend-info">
-                                        <a href="#" class="pull-right text-green">Profile</a>
-                                        <h5><a href="timeline.html" class="profile-link" th:text="${(friend.profile.firstName+' '+friend.profile.lastName}"></a></h5>
-                                        <p th:text="${friend.profile.job}"></p>
+                            <div class="col-md-6 col-sm-6" th:each="friend:${friends}">
+                                <div class="friend-card">
+                                    <img th:src="${friend.profile.cover}" alt="profile-cover"
+                                         class="img-responsive cover"/>
+                                    <div class="card-info">
+                                        <img th:src="${friend.profile.avatar}" alt="user" class="profile-photo-lg"/>
+                                        <div class="friend-info">
+                                            <a href="#" class="pull-right text-green">Profile</a>
+                                            <h5><a href="timeline.html" class="profile-link"
+                                                   th:text="${friend.profile.firstName+' '+friend.profile.lastName}"></a>
+                                            </h5>
+                                            <p th:text="${friend.profile.job}"></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </th:block>
                     </div>
 
@@ -225,7 +227,8 @@
                                     <img th:src="${nonFr.profile.avatar}" alt="user" class="profile-photo-lg"/>
                                     <div class="friend-info">
                                         <a href="#" class="pull-right text-green">Add Friend</a>
-                                        <h5><a href="timeline.html" class="profile-link" th:text="${nonFr.profile.firstName+' '+nonFr.profile.lastName}"></a></h5>
+                                        <h5><a href="timeline.html" class="profile-link"
+                                               th:text="${nonFr.profile.firstName+' '+nonFr.profile.lastName}"></a></h5>
                                         <p th:text="${nonFr.profile.job}"></p>
                                     </div>
                                 </div>
@@ -233,7 +236,7 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
                 <!-- Newsfeed Common Side Bar Right
           ================================================= -->
                 <div class="col-md-2 static">
