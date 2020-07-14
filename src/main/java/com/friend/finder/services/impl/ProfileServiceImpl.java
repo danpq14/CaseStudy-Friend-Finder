@@ -1,5 +1,6 @@
 package com.friend.finder.services.impl;
 
+import com.friend.finder.models.Account;
 import com.friend.finder.models.Profile;
 import com.friend.finder.repositories.ProfileRepository;
 import com.friend.finder.services.FullService;
@@ -30,5 +31,10 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void delete(Long id) {
         profileRepository.deleteById(id);
+    }
+
+    @Override
+    public Profile getProfileByAccount(Account account) {
+        return profileRepository.getProfileByAccount(account);
     }
 }

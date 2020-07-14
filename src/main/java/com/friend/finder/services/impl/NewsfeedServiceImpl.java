@@ -31,4 +31,9 @@ public class NewsfeedServiceImpl implements NewsfeedService {
     public void delete(Long id) {
         newsfeedRepository.deleteById(id);
     }
+
+    @Override
+    public Newsfeed getNewsfeedByAccount(String username) {
+        return newsfeedRepository.getNewsfeedByAccount(username);
+    }
 }
