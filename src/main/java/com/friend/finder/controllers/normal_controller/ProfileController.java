@@ -3,6 +3,7 @@ package com.friend.finder.controllers.normal_controller;
 import com.friend.finder.models.Account;
 import com.friend.finder.models.Profile;
 import com.friend.finder.services.AccountService;
+import com.friend.finder.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import java.security.Principal;
 public class ProfileController {
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private ProfileService profileService;
 
     @ModelAttribute("account")
     public Account getAccount(Principal principal) {
@@ -37,12 +40,14 @@ public class ProfileController {
         return modelAndView;
     }
     @PostMapping("/app/profile-edit")
-    public ModelAndView saveProfile(@ModelAttribute Profile profiles,@ModelAttribute("account") Account account){
-        account.setProfile(profiles);
-        Profile profile = account.getProfile();
-        accountService.save(account);
+    public ModelAndView saveProfile(@ModelAttribute(name = "profile") Profile newProfile,@ModelAttribute("account") Account account){
+        Profile currentProfile = account.getProfile();
+        newProfile.setId(currentProfile.getId());
+        profileService.save(newProfile);
         ModelAndView modelAndView = new ModelAndView("profile");
-        modelAndView.addObject("profile",profile);
+        modelAndView.addObject("profile",newProfile);
         return modelAndView;
     }
+
+
 }

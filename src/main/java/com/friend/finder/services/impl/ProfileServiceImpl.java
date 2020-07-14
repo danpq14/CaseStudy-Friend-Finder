@@ -37,4 +37,6 @@ public class ProfileServiceImpl implements ProfileService {
     public Profile getProfileByAccount(Account account) {
         return profileRepository.getProfileByAccount(account);
     }
+
+
 }
