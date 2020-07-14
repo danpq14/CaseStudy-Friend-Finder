@@ -197,12 +197,6 @@
                 <!-- Friend List
                 ================================================= -->
                 <div class="friend-list">
-                    <!--                    <th:block th:each="noneFriend : ${noneFriend}">-->
-                    <!--                        <div>-->
-                    <!--                        <div th:insert="layout-none-friend :: none-friend (noneFriend = ${noneFriend})"></div>-->
-                    <!--                        </div>-->
-                    <!--                    </th:block>-->
-
                     <div class="row">
                         <th:block th:if="${friends.size()!=0}">
                         <div class="col-md-6 col-sm-6" th:each="friend:${friends}">

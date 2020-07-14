@@ -26,7 +26,7 @@ public class Post {
     @OneToMany
     private Set<Dislikes> dislikes;
 
-    private Timestamp postTime = new Timestamp(System.currentTimeMillis());
+    private Timestamp postTime;
 
     @ManyToMany(mappedBy = "postSet")
     private Set<Newsfeed> newsfeedSet;
@@ -36,4 +36,5 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments;
+
 }

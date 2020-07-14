@@ -77,13 +77,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Boolean checkFriend(Account account, Account account2) {
-        List<Account> accounts = account.getFriends();
-        for(Account account1 : accounts){
-            if(account1.getUsername().equalsIgnoreCase(account2.getUsername())){
+    public Boolean checkFriend(Account currentAccount, Account checkAccount) {
+        List<Account> listFriends = currentAccount.getFriends();
+        for (Account account : listFriends){
+            if(account.getId() == checkAccount.getId()){
                 return true;
             }
-        }return false;
+        }
+        return false;
     }
 
 

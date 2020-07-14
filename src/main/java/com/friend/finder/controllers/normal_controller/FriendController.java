@@ -21,29 +21,27 @@ import java.util.Set;
 
 @Controller
 public class FriendController {
+
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    HttpSession session;
-
-
     @PostMapping("/app/search-friend")
-    public ModelAndView addFriend(@ModelAttribute("username") String username, Principal principal
-                    ){
-       List<Account> accounts = accountService.search(username,principal);
+    public ModelAndView addFriend(@ModelAttribute("username") String username, Principal principal){
+        List<Account> resultList = accountService.search(username,principal);
         List<Account> friends = new ArrayList<>();
         List<Account> noneFriends = new ArrayList<>();
-       Account account = accountService.findAccountByUserName(principal.getName());
-       ModelAndView modelAndView = new ModelAndView("friends-searching");
-       for(Account ac : accounts){
-           if(accountService.checkFriend(account,ac)){
-               friends.add(ac);
-           }else noneFriends.add(ac);
-       }
-       modelAndView.addObject("account",account);
-       modelAndView.addObject("friends",friends);
-       modelAndView.addObject("noneFriends",noneFriends);
-       return modelAndView;
+
+        Account currentAccount = accountService.findAccountByUserName(principal.getName());
+        ModelAndView modelAndView = new ModelAndView("friends-searching");
+        for(Account acc : resultList){
+           if(accountService.checkFriend(currentAccount,acc)){
+               friends.add(acc);
+           }
+           else noneFriends.add(acc);
+        }
+        modelAndView.addObject("account",currentAccount);
+        modelAndView.addObject("friends",friends);
+        modelAndView.addObject("noneFriends",noneFriends);
+        return modelAndView;
     }
 }
