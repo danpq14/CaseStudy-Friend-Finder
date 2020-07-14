@@ -1,6 +1,8 @@
 package com.friend.finder.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -9,7 +11,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "accounts")
-@Data
+@Getter
+@Setter
 public class Account {
 
     @Id
@@ -26,14 +29,6 @@ public class Account {
     @Column
     @Email
     private String email;
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "account_roles",
-//            joinColumns = @JoinColumn(
-//                    name = "user_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(
-//                    name = "role_id", referencedColumnName = "id"))
-//    private Collection<Role> roles;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id")

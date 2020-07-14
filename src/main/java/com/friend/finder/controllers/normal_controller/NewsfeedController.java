@@ -37,9 +37,10 @@ public class NewsfeedController {
 
     @GetMapping("/app/newsfeed")
     public String getNewsfeed(Principal principal, Model model, @PageableDefault(size = 8)Pageable pageable) {
-        Account account = accountService.findAccountByUserName(principal.getName());
+        String username = principal.getName();
+        Account account = accountService.findAccountByUserName(username);
         Profile profile = profileService.getProfileByAccount(account);
-        Newsfeed newsfeed = newsfeedService.getNewsfeedByAccount(account.getUsername());
+        Newsfeed newsfeed = newsfeedService.getNewsfeedByAccount(account);
         Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
         model.addAttribute("posts", posts);
         model.addAttribute("profile", profile);
