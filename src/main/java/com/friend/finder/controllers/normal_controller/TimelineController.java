@@ -43,4 +43,9 @@ public class TimelineController {
         }
         return false;
     }
+
+    @GetMapping("/app/timeline/{id}")
+    public ModelAndView viewTimeline(){
+        return null;
+    }
 }
