@@ -136,10 +136,12 @@
             <div class="create-post">
             	<div class="row">
             		<div class="col-md-7 col-sm-7">
-                  <div class="form-group">
-                    <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-md" />
-                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                  </div>
+                      <form action="/post/add" th:object="${post}">
+                        <div class="form-group">
+                          <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-md" />
+                          <textarea name="texts" id="exampleTextarea" th:field="*" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                        </div>
+                      </form>
                 </div>
             		<div class="col-md-5 col-sm-5">
                   <div class="tools">
@@ -183,20 +185,20 @@
                     <img src="/static/images/users/user-4.jpg" alt="" class="profile-photo-sm" />
                     <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                   </div>
-                  <div class="post-comment">
-                    <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-<!--                    <form th:action="@{/myComment/create}" method="post" th:object="${comment}">-->
-                    <form th:object="${comment}">
-                      <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">
-<!--                      <input type="text" th:text="${user_name}">-->
-
-                      <input type="button" value="Send" onclick="addComment()">
-<!--                      <button type="submit">Save</button>-->
-                    </form>
-                  </div>
                   <div class="post-comment" th:each = "comment: ${listComment}">
                     <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
                     <span id="commentContent" th:text="${comment.content}"><a href="timeline.html" class="profile-link">LONG</a></span>
+                  </div>
+                  <div class="post-comment">
+                    <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
+                    <!--                    <form th:action="@{/myComment/create}" method="post" th:object="${comment}">-->
+                    <form th:object="${comment}">
+                      <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">
+                      <!--                      <input type="text" th:text="${user_name}">-->
+
+                      <input type="button" value="Send" onclick="addComment()">
+                      <!--                      <button type="submit">Save</button>-->
+                    </form>
                   </div>
                 </div>
               </div>
