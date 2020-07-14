@@ -131,28 +131,105 @@
             <!-- Post Create Box
             ================================================= -->
             <div class="create-post">
-            	<div class="row">
-            		<div class="col-md-7 col-sm-7">
-                      <form action="/post/add" th:object="${post}">
-                        <div class="form-group">
-                          <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-md" />
-                          <textarea name="texts" id="exampleTextarea" th:field="*" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                        </div>
-                      </form>
-                </div>
-            		<div class="col-md-5 col-sm-5">
-                  <div class="tools">
-                    <ul class="publishing-tools list-inline">
-                      <li><a href="#"><i class="ion-compose"></i></a></li>
-                      <li><a href="#"><i class="ion-images"></i></a></li>
-                      <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                      <li><a href="#"><i class="ion-map"></i></a></li>
-                    </ul>
-                    <button class="btn btn-primary pull-right">Publish</button>
+              <form action="/post/add" th:object="${post}">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7">
+                    <div class="form-group">
+                      <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-md" />
+                      <textarea name="texts" id="exampleTextarea" th:field="*{content}" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-5 col-sm-5">
+                    <div class="tools">
+                      <ul class="publishing-tools list-inline">
+                        <li><a href="#"><i class="ion-compose"></i></a></li>
+                        <li><a href="#"><i class="ion-images"></i></a></li>
+                        <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
+                        <li><a href="#"><i class="ion-map"></i></a></li>
+                      </ul>
+                      <input type="button" class="btn btn-primary pull-right" onclick="addPost()" >Publish</input>
+                    </div>
                   </div>
                 </div>
-            	</div>
+              </form>
             </div><!-- Post Create Box End-->
+            <script>
+              function addPost() {
+                let content = document.getElementById("exampleTextarea").value;
+                let post = {
+                  content : content
+                };
+                $.ajax({
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  url: 'http://localhost:8090/post/create',
+                  type: 'POST',
+                  data: JSON.stringify(post),
+                  success: sucessHandlePost(),
+                  error: errorHandlePost()
+                });
+
+              }
+              // function errorHandlePost() {
+              //   alert("not post successful");
+              //
+              // }
+              // function sucessHandleShow() {
+              //   alert(" successful");
+              // }
+              // function errorHandleShow() {
+              //   alert("not successful");
+              //
+              // }
+              function sucessHandlePost(response) {
+                let content =
+                        "            <div class=\"post-content\">\n" +
+                        "              <img src=\"/static/images/post-/static/images/1.jpg\" alt=\"post-image\" class=\"img-responsive post-image\" />\n" +
+                        "              <div class=\"post-container\">\n" +
+                        "                <img src=\"/static/images/users/user-5.jpg\" alt=\"user\" class=\"profile-photo-md pull-left\" />\n" +
+                        "                <div class=\"post-detail\">\n" +
+                        "                  <div class=\"user-info\">\n" +
+                        "                    <h5><a href=\"timeline.html\" class=\"profile-link\">Alexis Clark</a> <span class=\"following\">following</span></h5>\n" +
+                        "                    <p class=\"text-muted\">Published a photo about 3 mins ago</p>\n" +
+                        "                  </div>\n" +
+                        "                  <div class=\"reaction\">\n" +
+                        "                    <a class=\"btn text-green\"><i class=\"icon ion-thumbsup\"></i> 13</a>\n" +
+                        "                    <a class=\"btn text-red\"><i class=\"fa fa-thumbs-down\"></i> 0</a>\n" +
+                        "                  </div>\n" +
+                        "                  <div class=\"line-divider\"></div>\n" +
+                        "                  <div class=\"post-text\">\n" +
+                        "                    <p>"+
+                        getPostInfomation(response) +
+                        "</p>\n" +
+                        "                  </div>\n" +
+                        "                  <div class=\"line-divider\"></div>\n" +
+                        "                   <div class=\"post-comment\">\n" +
+                        "                    <img src=\"/static/images/users/user-14.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
+                        "                    <p><a href=\"timeline.html\" class=\"profile-link\">Olivia </a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <i class=\"em em-anguished\"></i> Ut enim ad minim veniam, quis nostrud </p>\n" +
+                        "                  </div>\n" +
+                        "                  <div class=\"post-comment\">\n" +
+                        "                    <img src=\"/static/images/users/user-1.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
+                        "                    <p><a href=\"timeline.html\" class=\"profile-link\">Sarah</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>\n" +
+                        "                  </div>\n" +
+                        "                  <div class=\"post-comment\">\n" +
+                        "                    <img src=\"/static/images/users/user-2.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
+                        "                    <p><a href=\"timeline.html\" class=\"profile-link\">Linda</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n" +
+                        "                  </div>\n" +
+                        "                  <div class=\"post-comment\">\n" +
+                        "                    <img src=\"/static/images/users/user-1.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
+                        "                    <input type=\"text\" class=\"form-control\" placeholder=\"Post a comment\">\n" +
+                        "                  </div>\n" +
+                        "                </div>\n" +
+                        "              </div>\n" +
+                        "            </div>\n"
+                document.getElementById("testPost").innerHTML = content;
+              }
+              function getPostInfomation(post) {
+                return post.content
+              }
+            </script>
 
             <!-- Post Content
             ================================================= -->
@@ -211,7 +288,7 @@
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        url: 'http://localhost:8080/myComment/create',
+                        url: 'http://localhost:8090/myComment/create',
                         type: 'POST',
                         data: JSON.stringify(comment),
                         success: sucessHandle(),
@@ -225,7 +302,7 @@
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        url: 'http://localhost:8080/myComment/show',
+                        url: 'http://localhost:8090/myComment/show',
                         type: 'GET',
                         success: sucessHandleShow,
                         error: errorHandleShow
@@ -298,6 +375,9 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div id = "testPost">
+
             </div>
 
             <!-- Post Content
