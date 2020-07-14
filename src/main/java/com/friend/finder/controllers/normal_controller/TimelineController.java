@@ -2,6 +2,7 @@ package com.friend.finder.controllers.normal_controller;
 
 import com.friend.finder.models.Account;
 import com.friend.finder.models.Post;
+import com.friend.finder.models.Profile;
 import com.friend.finder.services.AccountService;
 import com.friend.finder.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,22 @@ public class TimelineController {
     @GetMapping("/app/timeline")
     public ModelAndView getTimeline(Principal principal, @PageableDefault(size = 5)Pageable pageable) {
         Account account = accountService.findAccountByUserName(principal.getName());
+        Profile profile = account.getProfile();
         ModelAndView modelAndView = new ModelAndView("timeline");
         Page<Post> postList = postService.getPostsByAccountOrderByPostTime(account,pageable);
         modelAndView.addObject("account",account);
         modelAndView.addObject("postList",postList);
+        if (isNewUser(profile)){
+            modelAndView.setViewName("profile-editing");
+            return modelAndView;
+        }
         return modelAndView;
+    }
+    public boolean isNewUser(Profile profile){
+        String fullName = profile.getFirstName() + " " + profile.getLastName();
+        if (fullName.equalsIgnoreCase("New User")) {
+            return true;
+        }
+        return false;
     }
 }

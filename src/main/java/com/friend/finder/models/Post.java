@@ -40,4 +40,7 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments;
 
+    @OneToOne
+    private Image images;
+
 }
