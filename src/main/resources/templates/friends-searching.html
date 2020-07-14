@@ -224,7 +224,9 @@
                                 <div class="card-info">
                                     <img th:src="${nonFr.profile.avatar}" alt="user" class="profile-photo-lg"/>
                                     <div class="friend-info">
-                                        <a th:href="@{/app/add-friend/${nonFr.id}}" class="pull-right text-green">Add Friend</a>
+<!--                                        <a th:href="@{/app/add-friend/${nonFr.id}}" onclick="addFriend()" class="pull-right text-green">Add Friend</a>-->
+                                        <input type="hidden" th:value="${nonFr.id}" th:id="">
+                                        <button type="button" onclick="sendFriendRequest()">Add Friend</button>
                                         <h5><a href="timeline.html" class="profile-link" th:text="${nonFr.profile.firstName+' '+nonFr.profile.lastName}"></a></h5>
                                         <p th:text="${nonFr.profile.job}"></p>
                                     </div>
