@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,5 +44,11 @@ public class FriendController {
         modelAndView.addObject("friends",friends);
         modelAndView.addObject("noneFriends",noneFriends);
         return modelAndView;
+    }
+
+    @PostMapping("/app/add-friend/{id}")
+    public ModelAndView addFriend(@PathVariable Long id, Principal principal) {
+        Account account = accountService.findAccountByUserName(principal.getName());
+        return null;
     }
 }
