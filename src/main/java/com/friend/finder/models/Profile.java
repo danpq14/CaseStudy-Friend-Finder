@@ -57,5 +57,7 @@ public class Profile {
         this.phone = "";
         this.avatar="https://t4.ftcdn.net/jpg/03/32/59/65/240_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg";
         this.cover="https://www.gocbao.com/wp-content/uploads/2020/04/anh-bia-phong-canh-dep-13.jpg";
+        this.firstName = "New";
+        this.lastName = "User";
     }
 }
