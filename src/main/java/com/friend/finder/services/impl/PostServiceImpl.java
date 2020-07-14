@@ -1,5 +1,6 @@
 package com.friend.finder.services.impl;
 
+import com.friend.finder.models.Account;
 import com.friend.finder.models.Newsfeed;
 import com.friend.finder.models.Post;
 import com.friend.finder.repositories.PostRepository;
@@ -38,5 +39,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Page<Post> getPostsByNewsfeedSetOrderByPostTimeDesc(Newsfeed newsfeed, Pageable pageable) {
         return postRepository.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
+    }
+
+    @Override
+    public Page<Post> getPostsByAccountOrderByPostTime(Account account, Pageable pageable) {
+        return postRepository.getPostsByAccountOrderByPostTime(account,pageable);
     }
 }
