@@ -40,7 +40,7 @@ public class NewsfeedController {
         Account account = accountService.findAccountByUserName(principal.getName());
         Profile profile = profileService.getProfileByAccount(account);
         Newsfeed newsfeed = newsfeedService.getNewsfeedByAccount(account.getUsername());
-        Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed);
+        Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
         model.addAttribute("posts", posts);
         model.addAttribute("profile", profile);
         if (isNewUser(profile)){
