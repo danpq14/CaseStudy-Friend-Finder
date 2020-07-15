@@ -19,30 +19,6 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccountService accountService;
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                .antMatchers(
-//                        "/login",
-//                        "/login-page",
-//                        "/signUp-page",
-//                        "/signUp",
-//                        "/").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login-page")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .invalidateHttpSession(true)
-//                .clearAuthentication(true)
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/login?logout")
-//                .permitAll();
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -52,7 +28,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/check-login")
                 .defaultSuccessUrl("/app/timeline")
-                .and().logout().logoutUrl("/logout").and().csrf().disable().cors();;
+                .and().logout().logoutSuccessUrl("/index").invalidateHttpSession(true).and().csrf().disable().cors();;
     }
 
     @Bean

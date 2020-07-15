@@ -24,15 +24,17 @@ public class FriendRequestController {
     FriendRequestService friendRequestService;
 
     @PostMapping("/app/add-friend/{id}")
-    public ResponseEntity<String> addFriend(@PathVariable Long id, Principal principal) {
+    public ResponseEntity<String> addFriend(@PathVariable String id, Principal principal) {
         Account account = accountService.findAccountByUserName(principal.getName());
+        Long receiveAccount = Long.parseLong(id);
         Long sendAccount = account.getId();
-        Long receiveAccount = id;
-        FriendRequest friendRequest = new FriendRequest();
-        friendRequest.setReceiveAccount(receiveAccount);
-        friendRequest.setSendAccount(sendAccount);
-        friendRequest.setStatus("unchecked");
-        friendRequestService.save(friendRequest);
+        if (!friendRequestService.isFriendRequestExist(receiveAccount, sendAccount)) {
+            FriendRequest friendRequest = new FriendRequest();
+            friendRequest.setReceiveAccount(receiveAccount);
+            friendRequest.setSendAccount(sendAccount);
+            friendRequest.setStatus("unchecked");
+            friendRequestService.save(friendRequest);
+        }
         String message = "Request Was Sent";
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }

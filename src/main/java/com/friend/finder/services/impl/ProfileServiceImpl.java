@@ -8,6 +8,7 @@ import com.friend.finder.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -38,5 +39,13 @@ public class ProfileServiceImpl implements ProfileService {
         return profileRepository.getProfileByAccount(account);
     }
 
+    @Override
+    public Profile findProfileById(Long id) {
+        return profileRepository.findById(id).get();
+    }
 
+    @Override
+    public List<Profile> findAllByFirstNameContainingOrLastNameContaining(String firstName, String lastName) {
+        return profileRepository.findAllByFirstNameContainingOrLastNameContaining(firstName, lastName);
+    }
 }

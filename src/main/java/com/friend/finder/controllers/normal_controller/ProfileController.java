@@ -1,10 +1,12 @@
 package com.friend.finder.controllers.normal_controller;
 
 import com.friend.finder.models.Account;
+import com.friend.finder.models.Post;
 import com.friend.finder.models.Profile;
 import com.friend.finder.services.AccountService;
 import com.friend.finder.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +51,24 @@ public class ProfileController {
         return modelAndView;
     }
 
+    @GetMapping("/app/profile/{username}")
+    public ModelAndView userProfile(@PathVariable("username") String username,Principal principal){
+        Account userAccount = accountService.findAccountByUserName(username);
+        Account currentAccount = accountService.findAccountByUserName(principal.getName());
+        Profile profile = userAccount.getProfile();
+        ModelAndView modelAndView = new ModelAndView("user-profile");
+        modelAndView.addObject("account",currentAccount);
+        modelAndView.addObject("profile",profile);
+
+
+        boolean isFriend = accountService.checkFriend(currentAccount, userAccount);
+        if (isFriend) {
+            modelAndView.addObject("message","Friend");
+        }
+        else {
+            modelAndView.addObject("message", "Add Friend");
+        }
+        return modelAndView;
+    }
 
 }

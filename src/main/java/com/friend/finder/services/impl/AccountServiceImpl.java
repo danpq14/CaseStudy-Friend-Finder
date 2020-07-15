@@ -100,4 +100,12 @@ public class AccountServiceImpl implements AccountService {
         return new User(account.getUsername(), account.getPassword(), list);
     }
 
+    @Override
+    public Account findById(Long id) {
+        Optional<Account>  account = accountRepository.findById(id);
+        if (account.isPresent()) {
+            return account.get();
+        }
+        return null;
+    }
 }

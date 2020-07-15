@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 @Controller
 public class IndexController {
 
@@ -14,7 +16,10 @@ public class IndexController {
     AccountService accountService;
 
     @GetMapping("/")
-    public String getIndex(){
+    public String getIndex(Principal principal){
+        if(principal != null){
+            return "redirect:/app/timeline";
+        }else
         return "redirect:/index";
     }
 
@@ -25,8 +30,5 @@ public class IndexController {
         model.addAttribute("account", account);
         return "index";
     }
-//    @GetMapping("/app/timeline")
-//    public String getTimeline(){
-//        return "timeline";
-//    }
+
 }

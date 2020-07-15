@@ -48,7 +48,7 @@
                   <ul class="dropdown-menu newsfeed-home">
                     <li><a href="newsfeed.html">Newsfeed</a></li>
                     <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                    <li><a href="newsfeed-friends.html">My friends</a></li>
+                    <li><a href="my-friends.html">My friends</a></li>
                     <li><a href="newsfeed-messages.html">Chatroom</a></li>
                     <li><a href="newsfeed-images.html">Images</a></li>
                     <li><a href="newsfeed-videos.html">Videos</a></li>
@@ -69,7 +69,7 @@
                   <li><a href="index.html">Landing Page</a></li>
                   <li><a href="newsfeed.html">Newsfeed</a></li>
                   <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
+                  <li><a href="my-friends.html">My friends</a></li>
                   <li><a href="newsfeed-messages.html">Chatroom</a></li>
                   <li><a href="newsfeed-images.html">Images</a></li>
                   <li><a href="newsfeed-videos.html">Videos</a></li>
@@ -109,15 +109,15 @@
 						<p class="signup-text">Signup now and meet awesome people around the world</p>
 						<form th:action="@{/signUp}" method="post"  th:object="${account}">
 							<fieldset class="form-group">
-								<input type="text" class="form-control" id="example-name" th:field="*{username}">
+								<input type="text" placeholder="Username" class="form-control" id="example-name" th:field="*{username}">
 								<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="email" class="form-control" id="example-email" th:field="*{email}">
+								<input type="email" placeholder="Email" class="form-control" id="example-email" th:field="*{email}">
 								<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="example-password" th:field="*{password}">
+								<input type="password" placeholder="Password" class="form-control" id="example-password" th:field="*{password}">
 								<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 							</fieldset>
 							<p>By signning up you agree to the terms</p>
