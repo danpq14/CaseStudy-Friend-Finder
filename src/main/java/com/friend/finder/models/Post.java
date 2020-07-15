@@ -9,8 +9,7 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Post {
 
     @Id
@@ -40,7 +39,8 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private Set<Comment> comments;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
     private Image images;
 
 }

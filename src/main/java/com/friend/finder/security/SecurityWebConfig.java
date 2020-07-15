@@ -52,7 +52,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/check-login")
                 .defaultSuccessUrl("/app/timeline")
-                .and().logout().logoutUrl("/logout").and().csrf().disable().cors();;
+                .and().logout().logoutSuccessUrl("/index").invalidateHttpSession(true).and().csrf().disable().cors();;
     }
 
     @Bean

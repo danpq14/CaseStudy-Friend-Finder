@@ -3,6 +3,7 @@ package com.friend.finder.controllers.normal_controller;
 import com.friend.finder.models.*;
 import com.friend.finder.services.AccountService;
 import com.friend.finder.services.CommentService;
+import com.friend.finder.services.ImageService;
 import com.friend.finder.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,19 +28,8 @@ public class PostController {
     private AccountService accountService;
     @Autowired
     private CommentService commentService;
-
-    @GetMapping("/app/newsfeed")
-    public ModelAndView getNewsfeed(Principal principal){
-        Account account = accountService.findAccountByUserName(principal.getName());
-        ModelAndView modelAndView =new ModelAndView("xxx");
-        modelAndView.addObject("post",new Post());
-        modelAndView.addObject("account",account);
-        return modelAndView;
-    }
-    @PostMapping("/app/newsfeed")
-    public ModelAndView postContent(@ModelAttribute Post post){
-        return null;
-    }
+    @Autowired
+    private ImageService imageService;
 
 
 }
