@@ -133,6 +133,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Friend Request</h5>
                                 <p class="card-text" th:text="${fr.string}"></p>
+                                <a th:href="@{/app/profile/{username}(username = ${fr.sendAccountUsername})}">Check Profile</a>
                                 <a th:href="@{/app/accept-request/{username}(username = ${fr.sendAccountUsername})}" class="card-link">Accept</a>
                                 <a th:href="@{/app/refuse-request/{username}(username = ${fr.sendAccountUsername})}" class="card-link">Refuse</a>
                             </div>
