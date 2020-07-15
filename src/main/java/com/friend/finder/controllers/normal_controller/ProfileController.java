@@ -57,7 +57,7 @@ public class ProfileController {
         Account currentAccount = accountService.findAccountByUserName(principal.getName());
         Profile profile = userAccount.getProfile();
         ModelAndView modelAndView = new ModelAndView("user-profile");
-        modelAndView.addObject("account",currentAccount);
+        modelAndView.addObject("account",userAccount);
         modelAndView.addObject("profile",profile);
 
 

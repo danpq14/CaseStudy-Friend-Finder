@@ -28,7 +28,7 @@ public class TimelineController {
     public ModelAndView getTimeline(Principal principal, @PageableDefault(size = 5)Pageable pageable) {
         Account account = accountService.findAccountByUserName(principal.getName());
         Profile profile = account.getProfile();
-        ModelAndView modelAndView = new ModelAndView("timeline");
+        ModelAndView modelAndView = new ModelAndView("abc");
         Page<Post> postList = postService.getPostsByAccountOrderByPostTime(account,pageable);
         modelAndView.addObject("account",account);
         modelAndView.addObject("postList",postList);
