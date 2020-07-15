@@ -9,7 +9,8 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Post {
 
     @Id

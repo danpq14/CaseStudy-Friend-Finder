@@ -40,6 +40,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public Profile findProfileById(Long id) {
+        return profileRepository.findById(id).get();
+    }
+
+    @Override
     public List<Profile> findAllByFirstNameContainingOrLastNameContaining(String firstName, String lastName) {
         return profileRepository.findAllByFirstNameContainingOrLastNameContaining(firstName, lastName);
     }
