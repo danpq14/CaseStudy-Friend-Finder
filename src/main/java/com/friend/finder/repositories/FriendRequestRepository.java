@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface FriendRequestRepository extends PagingAndSortingRepository<FriendRequest, Long> {
-    FriendRequest getAllByReceiveAccountAndStatusContaining(Long receiveId, String status);
+    Iterable<FriendRequest> getAllByReceiveAccountAndStatusContaining(Long receiveId, String status);
     FriendRequest findByReceiveAccountAndSendAccount(Long receiveId, Long sendId);
 }

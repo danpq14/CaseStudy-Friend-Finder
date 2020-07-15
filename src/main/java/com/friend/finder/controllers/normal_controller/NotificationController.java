@@ -27,16 +27,17 @@ public class NotificationController {
     @Autowired
     NotificationService notificationService;
 
-    @GetMapping("/notification")
+    @GetMapping("/app/notification")
     public ModelAndView notificationPage(Principal principal){
         Account account = accountService.findAccountByUserName(principal.getName());
-        List<FriendRequest> friendRequestList =(List) friendRequestService.getAllByReceiveAccountAndStatusIsLike(account.getId(), "unchecked");
+        List<FriendRequest> friendRequestList = friendRequestService.getAllByReceiveAccountAndStatusIsLike(account.getId(), "unchecked");
         List<FriendRequestToString> friendRequestToStrings = new ArrayList<>();
         for (FriendRequest friendRequest : friendRequestList) {
-            friendRequestToStrings.add(new FriendRequestToString(friendRequest));
+            FriendRequestToString friendRequestToString = friendRequestService.addFriendRequestToString(friendRequest);
+            friendRequestToStrings.add(friendRequestToString);
         }
         ModelAndView modelAndView = new ModelAndView("notification");
-        modelAndView.addObject("friendRequesList", friendRequestToStrings);
+        modelAndView.addObject("friendRequestList", friendRequestToStrings);
         modelAndView.addObject("account", account);
         return modelAndView;
     }

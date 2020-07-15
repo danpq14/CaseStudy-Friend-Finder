@@ -47,16 +47,13 @@
                 <ul class="nav navbar-nav navbar-right main-menu">
                     <li class="dropdown"><a href="#">Home</a></li>
                     <li class="dropdown">
-                        <a href="/app/newsfeed" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Newsfeed</span></a>
+                        <a href="/app/newsfeed">Newsfeed</span></a>
                     </li>
                     <li class="dropdown">
-                        <a href="/app/timeline" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Timeline</a>
+                        <a href="/app/timeline">Timeline</a>
                     </li>
                     <li class="dropdown">
-                        <a href="/notification" class="dropdown-toggle pages" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">Notification</a>
+                        <a href="/app/notification" >Notification</a>
                     </li>
                     <li class="dropdown"><a href="/logout">Logout</a></li>
                 </ul>
@@ -132,14 +129,13 @@
                     <!-- Notification
                     ================================================= -->
                     <th:block >
-                        <div>
-                            <table>
-                                <tr th:each="fr : ${friendRequesList}">
-                                    <td th:text="${fr}"></td>
-                                    <td><a th:href="@{/accept-friend/{username}(username = ${fr.sendAccountUsername})}">Accept</a></td>
-                                    <td><a href=""th:href="@{/accept-friend/{username}(username = ${fr.sendAccountUsername})}">Refuse</a></td>
-                                </tr>
-                            </table>
+                        <div class="card" style="width: 40rem;" th:each="fr:${friendRequestList}">
+                            <div class="card-body">
+                                <h5 class="card-title">Friend Request</h5>
+                                <p class="card-text" th:text="${fr.string}"></p>
+                                <a th:href="@{/app/accept-request/{username}(username = ${fr.sendAccountUsername})}" class="card-link">Accept</a>
+                                <a th:href="@{/app/refuse-request/{username}(username = ${fr.sendAccountUsername})}" class="card-link">Refuse</a>
+                            </div>
                         </div>
                     </th:block>
 
@@ -223,3 +219,6 @@
 <!--  ===================================================-->
 </body>
 </html>
+
+<!--class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
+<!--aria-expanded="false"-->
