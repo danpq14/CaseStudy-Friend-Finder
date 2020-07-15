@@ -89,8 +89,8 @@
                     <div class="col-md-9">
                         <ul class="list-inline profile-menu">
                             <li><a href="/app/timeline" class="active">Timeline</a></li>
-                            <li><a th:href="@{/app/profile/__${account.username}__}">About</a></li>
-
+                            <li><a th:href="@{/app/profile}">About</a></li>
+                            <li><a href="/app/my-friends" class="active">Friends</a></li>
                         </ul>
                         <ul class="follow-me list-inline">
                             <li><p th:text="${account.getFriends().size()+' Friends'}"></p></li>

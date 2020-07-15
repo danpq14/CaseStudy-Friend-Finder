@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
@@ -44,5 +45,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Page<Post> getPostsByAccountOrderByPostTime(Account account, Pageable pageable) {
         return postRepository.getPostsByAccountOrderByPostTime(account,pageable);
+    }
+
+    @Override
+    public List<Post> findAllByAccount(Account account) {
+        return  postRepository.findAllByAccount(account);
     }
 }

@@ -64,4 +64,9 @@ public class FriendRequestImpl implements FriendRequestService {
         friendRequestToString.setString(account);
         return friendRequestToString;
     }
+
+    @Override
+    public FriendRequest findByReceiveAccountAndSendAccount(Long receiveId, Long sendId) {
+        return friendRequestRepository.findByReceiveAccountAndSendAccount(receiveId, sendId);
+    }
 }
