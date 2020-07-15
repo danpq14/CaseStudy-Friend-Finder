@@ -367,14 +367,14 @@
                 'Accept' : 'appilication/json',
                 'Content-Type' : 'appilication/json'
             },
-            url : "http://localhost:8080/app/add-friend/"+ id,
+            url : "http://localhost:6969/app/add-friend/"+ id,
             type : "POST",
             success : addFriendSuccess(id)
         })
     }
 
     function addFriendSuccess(id) {
-        document.getElementById(id).innerHTML = "Waiting to Response"
+        document.getElementById(id).innerHTML = "Waiting For Response";
     }
 
 </script>

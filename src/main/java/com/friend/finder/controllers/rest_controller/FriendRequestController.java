@@ -28,11 +28,13 @@ public class FriendRequestController {
         Account account = accountService.findAccountByUserName(principal.getName());
         Long receiveAccount = Long.parseLong(id);
         Long sendAccount = account.getId();
-        FriendRequest friendRequest = new FriendRequest();
-        friendRequest.setReceiveAccount(receiveAccount);
-        friendRequest.setSendAccount(sendAccount);
-        friendRequest.setStatus("unchecked");
-        friendRequestService.save(friendRequest);
+        if (!friendRequestService.isFriendRequestExist(receiveAccount, sendAccount)) {
+            FriendRequest friendRequest = new FriendRequest();
+            friendRequest.setReceiveAccount(receiveAccount);
+            friendRequest.setSendAccount(sendAccount);
+            friendRequest.setStatus("unchecked");
+            friendRequestService.save(friendRequest);
+        }
         String message = "Request Was Sent";
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }

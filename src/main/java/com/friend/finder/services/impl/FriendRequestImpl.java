@@ -38,4 +38,13 @@ public class FriendRequestImpl implements FriendRequestService {
     public void delete(Long id) {
 
     }
+
+    @Override
+    public boolean isFriendRequestExist(Long receiveId, Long sendId) {
+        FriendRequest friendRequest = friendRequestRepository.findByReceiveAccountAndSendAccount(receiveId, sendId);
+        if (friendRequest != null) {
+            return true;
+        }
+        return false;
+    }
 }

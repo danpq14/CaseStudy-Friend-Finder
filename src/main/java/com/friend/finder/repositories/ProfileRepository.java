@@ -11,4 +11,6 @@ public interface ProfileRepository extends PagingAndSortingRepository<Profile,Lo
     Profile getProfileByAccount(Account account);
 
     List<Profile> findAllByFirstNameContainingOrLastNameContaining(String firstName, String lastName);
+
+    List<Profile> findAllByFirstNameLike(String title);
 }
