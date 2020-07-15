@@ -44,17 +44,8 @@ public class NewsfeedController {
         Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
         model.addAttribute("posts", posts);
         model.addAttribute("profile", profile);
-        if (isNewUser(profile)){
-            return "profile-editing";
-        }
+
         return "newsfeed";
     }
 
-    public boolean isNewUser(Profile profile){
-        String fullName = profile.getFirstName() + " " + profile.getLastName();
-        if (fullName.equalsIgnoreCase("New User")) {
-            return true;
-        }
-        return false;
-    }
 }

@@ -49,5 +49,20 @@ public class ProfileController {
         return modelAndView;
     }
 
+    @GetMapping("/app/profile/{username}")
+    public ModelAndView userProfile(@PathVariable("username") String username,Principal principal){
+        Account userAccount = accountService.findAccountByUserName(username);
+        Account account = accountService.findAccountByUserName(principal.getName());
+        Profile profile = userAccount.getProfile();
+        ModelAndView modelAndView = new ModelAndView("user-profile");
+        if(accountService.checkFriend(account,userAccount)){
+            modelAndView.addObject("message","Friend");
+        }else {
+            modelAndView.addObject("message","Add Friend");
+        }
+        modelAndView.addObject("profile",profile);
+        modelAndView.addObject("account",userAccount);
+        return modelAndView;
+    }
 
 }

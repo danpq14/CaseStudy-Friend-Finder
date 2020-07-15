@@ -38,6 +38,8 @@ public class TimelineController {
         }
         return modelAndView;
     }
+
+
     public boolean isNewUser(Profile profile){
         String fullName = profile.getFirstName() + " " + profile.getLastName();
         if (fullName.equalsIgnoreCase("New User")) {
