@@ -1,5 +1,6 @@
 package com.friend.finder.services.impl;
 
+import com.friend.finder.models.Account;
 import com.friend.finder.models.Newsfeed;
 import com.friend.finder.repositories.NewsfeedRepository;
 import com.friend.finder.services.FullService;
@@ -33,7 +34,7 @@ public class NewsfeedServiceImpl implements NewsfeedService {
     }
 
     @Override
-    public Newsfeed getNewsfeedByAccount(String username) {
-        return newsfeedRepository.getNewsfeedByAccount(username);
+    public Newsfeed getNewsfeedByAccount(Account account) {
+        return newsfeedRepository.getNewsfeedByAccount(account);
     }
 }

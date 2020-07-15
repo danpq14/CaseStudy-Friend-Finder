@@ -37,6 +37,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<Post> getPostsByNewsfeedSetOrderByPostTimeDesc(Newsfeed newsfeed, Pageable pageable) {
-        return postRepository.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed, pageable);
+        return postRepository.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
     }
 }

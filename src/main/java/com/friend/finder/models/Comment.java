@@ -1,5 +1,6 @@
 package com.friend.finder.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     private Account account;
 
@@ -20,11 +22,9 @@ public class Comment {
     private String content;
 
     private Timestamp postTime = new Timestamp(System.currentTimeMillis());
-
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinTable(name = "post_comment",
                 joinColumns = @JoinColumn(name = "comment_id"),
                 inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Post post;
-
 }

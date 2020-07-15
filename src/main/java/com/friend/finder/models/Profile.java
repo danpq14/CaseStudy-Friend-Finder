@@ -1,12 +1,15 @@
 package com.friend.finder.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Profile {
 
     @Id
@@ -52,10 +55,16 @@ public class Profile {
     private Account account;
 
     public Profile() {
-        this.firstName = "";
-        this.lastName = "";
         this.phone = "";
         this.avatar="https://t4.ftcdn.net/jpg/03/32/59/65/240_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg";
         this.cover="https://www.gocbao.com/wp-content/uploads/2020/04/anh-bia-phong-canh-dep-13.jpg";
+        this.firstName = "New";
+        this.lastName = "User";
+        this.address= "No information";
+        this.birthDay = "No information";
+        this.interest = "No information";
+        this.information = "No information";
+        this.relation = "No information";
+        this.job = "No information";
     }
 }

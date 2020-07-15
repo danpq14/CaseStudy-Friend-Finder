@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NewsfeedRepository extends PagingAndSortingRepository<Newsfeed,Long> {
-    Newsfeed getNewsfeedByAccount(String username);
+    Newsfeed getNewsfeedByAccount(Account account);
 }

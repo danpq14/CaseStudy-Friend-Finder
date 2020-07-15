@@ -60,24 +60,33 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Transactional
     public List<Account> search(String keyword, Principal principal) {
-//        Account account = findAccountByUserName(principal.getName());
-//
-//        List<Account> accounts = accountRepository.findAllByUsernameLike(keyword, account.getId());
+        Account account = findAccountByUserName(principal.getName());
+        List<Account> accounts = accountRepository.findAllByUsernameLike(keyword, account.getId());
 //        if (!accounts.isEmpty()) {
 //            account.setFriends(accounts);
 //            accountRepository.save(account);
 //        }
 //
-//        return accounts;
-        return null;
+        return accounts;
     }
 
     @Override
     public Account save(Account account) {
         return accountRepository.save(account);
     }
+
+    @Override
+    public Boolean checkFriend(Account currentAccount, Account checkAccount) {
+        List<Account> listFriends = currentAccount.getFriends();
+        for (Account account : listFriends){
+            if(account.getId() == checkAccount.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

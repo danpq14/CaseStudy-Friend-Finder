@@ -1,14 +1,7 @@
 package com.friend.finder.controllers.normal_controller;
 
-import com.friend.finder.models.Account;
-import com.friend.finder.models.Newsfeed;
-import com.friend.finder.models.Post;
-import com.friend.finder.models.Profile;
-import com.friend.finder.repositories.NewsfeedRepository;
-import com.friend.finder.services.AccountService;
-import com.friend.finder.services.NewsfeedService;
-import com.friend.finder.services.PostService;
-import com.friend.finder.services.ProfileService;
+import com.friend.finder.models.*;
+import com.friend.finder.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +9,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import java.util.List;
+
 import java.security.Principal;
-import java.util.Set;
 
 @Controller
-public class NewsfeedController {
+public class TimelineController {
 
     @Autowired
     private AccountService accountService;
@@ -35,11 +27,15 @@ public class NewsfeedController {
     @Autowired
     private ProfileService profileService;
 
-    @GetMapping("/app/newsfeed")
-    public String getNewsfeed(Principal principal, Model model, @PageableDefault(size = 8)Pageable pageable) {
+    @Autowired
+    private TimelineService timelineService;
+
+    @GetMapping("/app/timeline")
+    public String getTimeline(Principal principal, Model model, @PageableDefault(size = 8) Pageable pageable) {
         String username = principal.getName();
         Account account = accountService.findAccountByUserName(username);
         Profile profile = account.getProfile();
+        Timeline timeline = account.getTimeline();
         Newsfeed newsfeed = newsfeedService.getNewsfeedByAccount(account);
         Page<Post> posts = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed,pageable);
         model.addAttribute("posts", posts);
@@ -47,7 +43,7 @@ public class NewsfeedController {
         if (isNewUser(profile)){
             return "profile-editing";
         }
-        return "newsfeed";
+        return "timeline";
     }
 
     public boolean isNewUser(Profile profile){

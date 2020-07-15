@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("myComment")
+@RequestMapping("app/myComment")
 public class CommentController {
     @Autowired
     CommentService commentService;
@@ -24,8 +24,8 @@ public class CommentController {
         ModelAndView modelAndView = new ModelAndView("newsfeed");
         modelAndView.addObject("comment", new Comment());
         modelAndView.addObject("listComment", listComment);
-//        String user_name = principal.getName();
-//        modelAndView.addObject("user_name", accountService.findAccountByUserName(user_name).getId());
+        String user_name = principal.getName();
+        modelAndView.addObject("user_name", accountService.findAccountByUserName(user_name).getId());
         return modelAndView;
     }
 
