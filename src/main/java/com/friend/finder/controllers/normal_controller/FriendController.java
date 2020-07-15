@@ -38,11 +38,20 @@ public class FriendController {
 
     @PostMapping("/app/search-friend")
     public ModelAndView addFriend(@ModelAttribute("friend") String username, Principal principal){
+        Account account = accountService.findAccountByUserName(principal.getName());
+        Profile profile = account.getProfile();
         List<Profile> profileList = profileService.findAllByFirstNameContainingOrLastNameContaining(username, username);
+        List<Profile> list = new ArrayList<>();
+        for(Profile p : profileList){
+            if (p.getId() != profile.getId()) {
+                list.add(p);
+            }
+        }
+
         List<Account> resultList = new ArrayList<>();
-        if (!profileList.isEmpty() && profileList != null) {
-            for (Profile profile : profileList) {
-                resultList.add(profile.getAccount());
+        if (!list.isEmpty() && list != null) {
+            for (Profile p : list) {
+                resultList.add(p.getAccount());
             }
         }
 

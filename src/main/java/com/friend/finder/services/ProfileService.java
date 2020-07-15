@@ -7,5 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 public interface ProfileService extends FullService<Profile> {
     Profile getProfileByAccount(Account account);
+    Profile findProfileById(Long id);
     List<Profile> findAllByFirstNameContainingOrLastNameContaining(String firstName, String lastName);
 }

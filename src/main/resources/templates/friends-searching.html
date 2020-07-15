@@ -166,7 +166,7 @@
                                     <div class="card-info">
                                         <img th:src="${friend.profile.avatar}" alt="user" class="profile-photo-lg"/>
                                         <div class="friend-info">
-                                            <a href="#" class="pull-right text-green">Profile</a>
+                                            <a th:href="@{/app/profile/__${friend.username}__}" class="pull-right text-green">Profile</a>
                                             <h5><a href="timeline.html" class="profile-link"
                                                    th:text="${friend.profile.firstName+' '+friend.profile.lastName}"></a>
                                             </h5>
@@ -185,7 +185,7 @@
                                         <img th:src="${nonFr.profile.avatar}" alt="user" class="profile-photo-lg"/>
                                         <div class="friend-info">
                                             <a th:onclick="'javascript:sendFriendRequest(\''+ ${nonFr.id} +'\');'" class="pull-right text-green"><p th:id="${nonFr.id}">Add Friend</p></a>
-                                            <h5><a href="timeline.html" class="profile-link"
+                                            <h5><a th:href="@{/app/profile/__${nonFr.username}__}" class="profile-link"
                                                    th:text="${nonFr.profile.firstName+' '+nonFr.profile.lastName}"></a>
                                             </h5>
                                             <p th:text="${nonFr.profile.job}"></p>

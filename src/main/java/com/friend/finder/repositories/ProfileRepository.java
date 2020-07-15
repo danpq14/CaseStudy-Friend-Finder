@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ProfileRepository extends PagingAndSortingRepository<Profile,Long> {
     Profile getProfileByAccount(Account account);
+    Profile findProfileById(Long id);
 
     List<Profile> findAllByFirstNameContainingOrLastNameContaining(String firstName, String lastName);
 
