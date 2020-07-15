@@ -3,6 +3,7 @@ package com.friend.finder.controllers.normal_controller;
 import com.friend.finder.models.Account;
 import com.friend.finder.models.ChatMessage;
 import com.friend.finder.services.AccountService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
@@ -28,9 +30,11 @@ public class ChatController {
         Account account = accountService.findAccountByUserName(principal.getName());
         return account;
     }
-    @GetMapping("/chat")
-    public String chatView(@ModelAttribute("user") Account account){
-        return "chat";
+    @GetMapping("/app/chat")
+    public ModelAndView chatView(@ModelAttribute("user") Account account){
+        ModelAndView modelAndView = new ModelAndView("chat");
+        modelAndView.addObject("username",account.getProfile().getFirstName());
+        return modelAndView;
 
     }
 

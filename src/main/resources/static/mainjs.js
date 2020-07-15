@@ -17,7 +17,7 @@ var colors = [
 ];
 
 function connect(event) {
-    username = document.querySelector('#name').value.trim();
+    username = document.querySelector('#name').value;
 
     if(username) {
         usernamePage.classList.add('hidden');
