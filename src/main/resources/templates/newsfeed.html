@@ -20,7 +20,7 @@
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="/static/images/fav.png"/>
 	</head>
-  <body onload = showPost()>
+  <body >
 
     <!-- Header
     ================================================= -->
@@ -119,79 +119,61 @@
                     <div class="tools">
                       <ul class="publishing-tools list-inline">
                         <li><a href="#"><i class="ion-compose"></i></a></li>
-                        <li><a href="#"><i class="ion-images"></i></a></li>
+                        <li><button id="button" type="button" ><i class="ion-images"></i></button></li>
+                        <li><div id="fn" hidden>Image Url
+                          <input type="text"/>
+                        </div></li>
                         <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
                         <li><a href="#"><i class="ion-map"></i></a></li>
                       </ul>
+                      <script>
+                        $("#button").click(function() {
+                          $("#fn").show();
+                        });
+                      </script>
                       <input type="button" class="btn btn-primary pull-right"  onclick="addPost()" value="Publish"></input>
                     </div>
                   </div>
                 </div>
               </form>
             </div><!-- Post Create Box End-->
-                  ********************************
-                  <div id = "longdeptrai">
-                  </div>
-                  ******************************************
-                  <div id = "newPost">
-                    <h1>Long</h1>
-                  </div>
-                  <div id = "oldPost" th:each="post : ${listPost}">
-                    <div class="post-content">
-                      <img src="/static/images/users/user-1.jpg" alt="post-image" class="img-responsive post-image" />
-                      <div class="post-container">
-                        <img src="/static/images/users/user-5.jpg" alt="user" class="profile-photo-md pull-left" />
-                        <div class="post-detail">
-                          <div class="user-info">
-                            <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
-                            <p class="text-muted">Published a photo about 3 mins ago</p>
-                          </div>
-                          <h1>DAY LA TEST THU</h1>
-                          <div class="reaction">
-                            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                            <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                          </div>
-                          <div class="line-divider"></div>
-                          <div class="post-text">
-                            <p th:text="${post.content}"><i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                          </div>
-                          <div class="line-divider"></div>
-                          <div class="post-comment">
-                            <img src="/static/images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                          </div>
-                          <div class="post-comment">
-                            <img src="/static/images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                          </div>
-                          <div  class="post-comment" th:each = "comment: ${post.getComments()}">
-                            <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                            <p th:text="${comment.content}"><a href="timeline.html" class="profile-link">LONG</a></p>
-                          </div>
-                          --------------------------
-                          <div  class="post-comment" >
-                            <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                            <p id="longdeptrai1" ><a href="timeline.html" class="profile-link">Long</a>Duong</p>
-                          </div>
-                          <input th:id ="'idOfPostToWriteComment' + ${post.id}" type="text" th:value="${post.id}" >
-
-                          -----------------------------
-                          <div class="post-comment">
-                            <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                            <!--                    <form th:action="@{/myComment/create}" method="post" th:object="${comment}">-->
-                            <form th:object="${comment}">
-                              <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">
-                              <!--                      <input type="text" th:text="${user_name}">-->
-
-                              <input th:id ="${post.id}" type="button" value="Send" onclick="addComment(this)">
-                              <!--                      <button type="submit">Save</button>-->
-                            </form>
+                  <div id="oldPost">
+                    <div th:each="post : ${listPost}">
+                      <div class="post-content">
+                        <img th:src="${post.images}" alt="post-image" class="img-responsive post-image" />
+                        <div class="post-container">
+                          <img th:src="${account.profile.avatar}" alt="user" class="profile-photo-md pull-left" />
+                          <div class="post-detail">
+                            <div class="user-info">
+                              <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
+                              <p class="text-muted">Published a photo about 3 mins ago</p>
+                            </div>
+                            <h1>DAY LA TEST THU</h1>
+                            <div class="reaction">
+                              <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+                              <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                            </div>
+                            <div class="line-divider"></div>
+                            <div class="post-text">
+                              <p th:text="${post.content}"><i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                            </div>
+                            <div  class="post-comment" th:each = "comment: ${post.getComments()}">
+                              <img th:src="${comment.account.profile.avatar}" alt="" class="profile-photo-sm" />
+                              <p><a href="timeline.html" class="profile-link" th:text="${comment.account.profile.firstName}"> </a><i
+                                      class="em em-laughing"></i> <span th:text="${comment.content}"></span> </p>>
+                            </div>
+                            <div class="post-comment">
+                              <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
+                              <form th:object="${comment}">
+                                <input type="text" class="form-control" th:id ="'comment'+ ${post.id}" placeholder="Post a comment">
+                                <input th:id ="${post.id}" type="button" value="Send" onclick="addComment(this)">
+                              </form>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   ******************************************
             <script>
               function addPost() {
@@ -207,179 +189,72 @@
                   url: 'http://localhost:6969/app/post/create',
                   type: 'POST',
                   data: JSON.stringify(post),
+                  error: alert("khong them duoc post"),
                   success: sucessHandlePost,
-                  error: "khong them duoc"
                 });
               }
-              function sucessHandlePost(response) {
-                  let postContent = "";
-                  postContent +=
-                          "            <div class=\"post-content\">\n" +
-                          "              <img src=\"/static/images/post-/static/images/1.jpg\" alt=\"post-image\" class=\"img-responsive post-image\" />\n" +
-                          "              <div class=\"post-container\">\n" +
-                          "                <img src=\"/static/images/users/user-5.jpg\" alt=\"user\" class=\"profile-photo-md pull-left\" />\n" +
-                          "                <div class=\"post-detail\">\n" +
-                          "                  <div class=\"user-info\">\n" +
-                          "                    <h5><a href=\"timeline.html\" class=\"profile-link\">Alexis Clark</a> <span class=\"following\">following</span></h5>\n" +
-                          "                    <p class=\"text-muted\">Published a photo about 3 mins ago</p>\n" +
-                          "                  </div>\n" +
-                          "                  <div class=\"reaction\">\n" +
-                          "                    <a class=\"btn text-green\"><i class=\"icon ion-thumbsup\"></i> 13</a>\n" +
-                          "                    <a class=\"btn text-red\"><i class=\"fa fa-thumbs-down\"></i> 0</a>\n" +
-                          "                  </div>\n" +
-                          "                  <div class=\"line-divider\"></div>\n" +
-                          "                  <div class=\"post-text\">\n" +
-                          "                    <p>"+response.content+"<i class=\"em em-anguished\"></i> <i class=\"em em-anguished\"></i> <i class=\"em em-anguished\"></i></p>\n" +
-                          "                  </div>\n" +
-                          "                  <div class=\"line-divider\"></div>\n" +
-                          "                  <div class=\"post-comment\">\n" +
-                          "                    <img src=\"/static/images/users/user-11.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                          "                    <p><a href=\"timeline.html\" class=\"profile-link\">Diana </a><i class=\"em em-laughing\"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>\n" +
-                          "                  </div>\n" +
-                          "                  <div class=\"post-comment\">\n" +
-                          "                    <img src=\"/static/images/users/user-4.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                          "                    <p><a href=\"timeline.html\" class=\"profile-link\">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>\n" +
-                          "                  </div>\n" +
-                          "                  <div id=\"comment\" class=\"post-comment\" th:each = \"comment: ${listComment}\">\n" +
-                          "                    <img src=\"/static/images/users/user-1.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                          "                    <p id=\"commentContent\" th:text=\"${comment.content}\"><a href=\"timeline.html\" class=\"profile-link\">LONG</a></p>\n" +
-                          "                  </div>\n" +
-                          "                  <div class=\"post-comment\">\n" +
-                          "                    <img src=\"/static/images/users/user-1.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                          "                    <form th:object=\"${comment}\">\n" +
-                          "                              <input id = \"idOfPostToWriteComment\" type=\"hidden\" th:text=\"${post.id}\" value="+response.id+">\n"+
-                          "                      <input type=\"text\" class=\"form-control\" th:field=\"*{content}\" placeholder=\"Post a comment\">\n" +
-                          "\n" +
-                          "                      <input type=\"button\" value=\"Send\" onclick=\"addComment()\">\n" +
-                          "                    </form>\n" +
-                          "                  </div>\n" +
-                          "                </div>\n" +
-                          "              </div>\n" +
-                          "            </div>";
-                document.getElementById("newPost").innerHTML = postContent;
-                window.onload;
+              function sucessHandlePost() {
+                $.ajax({
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  url: 'http://localhost:6969/app/post/show',
+                  type: 'GET',
+                  data: JSON.stringify(post),
+                  error: function(){
+                    alert("khong tai duoc post")
+                  },
+                  success: function loadPost(request){
+                    alert("dang tai")
+                    let postContent = "";
+                    for(let i=0; i<request.length; i++){
+                      let post = request[i].content;
+                      let comment = post.getComments;
+                      postContent += ` <div class="post-content">
+                      <img th:src="${post.images}" alt="post-image" class="img-responsive post-image" />
+                      <div class="post-container">
+                        <img th:src="${account.profile.avatar}" alt="user" class="profile-photo-md pull-left" />
+                        <div class="post-detail">
+                          <div class="user-info">
+                            <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
+                            <p class="text-muted">Published a photo about 3 mins ago</p>
+                          </div>
+                          <h1>DAY LA TEST THU</h1>
+                          <div class="reaction">
+                            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+                            <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                          </div>
+                          <div class="line-divider"></div>
+                          <div class="post-text">
+                            <p th:text="${post.content}"><i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                          </div>
+                          <div  class="post-comment" th:each = "comment: ${post.getComments()}">
+                            <img th:src="${comment.account.profile.avatar}" alt="" class="profile-photo-sm" />
+                            <p><a href="timeline.html" class="profile-link" th:text="${comment.account.profile.firstName}"> </a><i
+                                    class="em em-laughing"></i> <span th:text="${comment.content}"></span> </p>>
+                          </div>
+                          <div class="post-comment">
+                            <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
+                            <form th:object="${comment}">
+                              <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">
+                              <input th:id ="${post.id}" type="button" value="Send" onclick="addComment(this)">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>`
+                    }
+                    document.getElementById("oldPost").innerHTML = postContent;
+                  }
+                });
               }
-                function showNewPost(response) {
-                  // let content = "";
-                  // for (let i = 0; i < response.length; i++) {
-                  //   content +=
-                  //        "            <div class=\"post-content\">\n" +
-                  //           "              <img src=\"/static/images/post-/static/images/1.jpg\" alt=\"post-image\" class=\"img-responsive post-image\" />\n" +
-                  //           "              <div class=\"post-container\">\n" +
-                  //           "                <img src=\"/static/images/users/user-5.jpg\" alt=\"user\" class=\"profile-photo-md pull-left\" />\n" +
-                  //           "                <div class=\"post-detail\">\n" +
-                  //           "                  <div class=\"user-info\">\n" +
-                  //           "                    <h5><a href=\"timeline.html\" class=\"profile-link\">Alexis Clark</a> <span class=\"following\">following</span></h5>\n" +
-                  //           "                    <p class=\"text-muted\">Published a photo about 3 mins ago</p>\n" +
-                  //           "                  </div>\n" +
-                  //           "                  <div class=\"reaction\">\n" +
-                  //           "                    <a class=\"btn text-green\"><i class=\"icon ion-thumbsup\"></i> 13</a>\n" +
-                  //           "                    <a class=\"btn text-red\"><i class=\"fa fa-thumbs-down\"></i> 0</a>\n" +
-                  //           "                  </div>\n" +
-                  //           "                  <div class=\"line-divider\"></div>\n" +
-                  //           "                  <div class=\"post-text\">\n" +
-                  //           "                    <p>"+response[i].content+"<i class=\"em em-anguished\"></i> <i class=\"em em-anguished\"></i> <i class=\"em em-anguished\"></i></p>\n" +
-                  //           "                  </div>\n" +
-                  //           "                  <div class=\"line-divider\"></div>\n" +
-                  //           "                  <div class=\"post-comment\">\n" +
-                  //           "                    <img src=\"/static/images/users/user-11.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                  //           "                    <p><a href=\"timeline.html\" class=\"profile-link\">Diana </a><i class=\"em em-laughing\"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>\n" +
-                  //           "                  </div>\n" +
-                  //           "                  <div class=\"post-comment\">\n" +
-                  //           "                    <img src=\"/static/images/users/user-4.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                  //           "                    <p><a href=\"timeline.html\" class=\"profile-link\">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>\n" +
-                  //           "                  </div>\n" +
-                  //           "                  <div id=\"comment\" class=\"post-comment\" th:each = \"comment: ${listComment}\">\n" +
-                  //           "                    <img src=\"/static/images/users/user-1.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                  //           "                    <p id=\"commentContent\" th:text=\"${comment.content}\"><a href=\"timeline.html\" class=\"profile-link\">LONG</a></p>\n" +
-                  //           "                  </div>\n" +
-                  //           "                  <div class=\"post-comment\">\n" +
-                  //           "                    <img src=\"/static/images/users/user-1.jpg\" alt=\"\" class=\"profile-photo-sm\" />\n" +
-                  //           "                    <form th:object=\"${comment}\">\n" +
-                  //           "                      <input type=\"text\" class=\"form-control\" th:field=\"*{content}\" placeholder=\"Post a comment\">\n" +
-                  //           "\n" +
-                  //           "                      <input type=\"button\" value=\"Send\" onclick=\"addComment("+response[i].id+")\">\n" +
-                  //           "                    </form>\n" +
-                  //           "                  </div>\n" +
-                  //           "                </div>\n" +
-                  //           "              </div>\n" +
-                  //           "            </div>"
-                  //   console.log(response[i].content);
-                  // }
-                  // document.getElementById("newPost").innerHTML = content;
-                  // alert("tai toan bo post thanh cong")
-                }
             </script>
 
-            <!-- Post Content
-            ================================================= -->
-<!--            <div class="post-content">-->
-<!--              <img src="/static/images/post-/static/images/1.jpg" alt="post-image" class="img-responsive post-image" />-->
-<!--              <div class="post-container">-->
-<!--                <img src="/static/images/users/user-5.jpg" alt="user" class="profile-photo-md pull-left" />-->
-<!--                <div class="post-detail">-->
-<!--                  <div class="user-info">-->
-<!--                    <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>-->
-<!--                    <p class="text-muted">Published a photo about 3 mins ago</p>-->
-<!--                  </div>-->
-<!--                  <div class="reaction">-->
-<!--                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>-->
-<!--                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>-->
-<!--                  </div>-->
-<!--                  <div class="line-divider"></div>-->
-<!--                  <div class="post-text">-->
-<!--                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>-->
-<!--                  </div>-->
-<!--                  <div class="line-divider"></div>-->
-<!--                  <div class="post-comment">-->
-<!--                    <img src="/static/images/users/user-11.jpg" alt="" class="profile-photo-sm" />-->
-<!--                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>-->
-<!--                  </div>-->
-<!--                  <div class="post-comment">-->
-<!--                    <img src="/static/images/users/user-4.jpg" alt="" class="profile-photo-sm" />-->
-<!--                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>-->
-<!--                  </div>-->
-<!--                  <div id="comment" class="post-comment" th:each = "comment: ${listComment}">-->
-<!--                    <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />-->
-<!--                    <p id="commentContent" th:text="${comment.content}"><a href="timeline.html" class="profile-link">LONG</a></p>-->
-<!--                  </div>-->
-<!--                  <div class="post-comment">-->
-<!--                    <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />-->
-<!--                    &lt;!&ndash;                    <form th:action="@{/myComment/create}" method="post" th:object="${comment}">&ndash;&gt;-->
-<!--                    <form th:object="${comment}">-->
-<!--                      <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">-->
-
-<!--                      <input type="button" value="Send" onclick="addComment()">-->
-<!--                    </form>-->
-<!--                  </div>-->
-<!--                  ********************************-->
-<!--                  <div id = "longdeptrai">-->
-<!--                  </div>-->
-<!--                  ********************************-->
-<!--                  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-<!--                  <div  class="post-comment" >-->
-<!--                    <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />-->
-<!--                    <p id="longdeptrai1" ><a href="timeline.html" class="profile-link">Long</a>Duong</p>-->
-<!--                  </div>-->
-<!--                  -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-<!--                  <div class="post-comment">-->
-<!--                    <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />-->
-<!--                    &lt;!&ndash;                    <form th:action="@{/myComment/create}" method="post" th:object="${comment}">&ndash;&gt;-->
-<!--                    <form th:object="${comment}">-->
-<!--                      <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">-->
-<!--                      &lt;!&ndash;                      <input type="text" th:text="${user_name}">&ndash;&gt;-->
-
-<!--                      <input type="button" value="Send" onclick="addComment()">-->
-<!--                      &lt;!&ndash;                      <button type="submit">Save</button>&ndash;&gt;-->
-<!--                    </form>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
                   <script>
                     function addComment(e) {
                       console.log(e.id);
-                      let content = document.getElementById("content").value;
+                      let content = document.getElementById("comment"+e.id).value;
                       // let id = document.getElementById("idOfPostToWriteComment").value;
                       let comment = {
                         content : content

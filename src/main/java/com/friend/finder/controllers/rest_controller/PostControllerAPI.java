@@ -7,6 +7,7 @@ import com.friend.finder.models.Profile;
 import com.friend.finder.services.*;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,7 @@ public class PostControllerAPI {
     ProfileService profileService;
     @Autowired
     NewsfeedService newsfeedService;
-//    @GetMapping("/create")
-//    public List<Post> getAllPost(){
-//        return (List<Post>) postService.findAll();
-//    }
+
     @PostMapping("/create")
     public Post createPost(@RequestBody Post post, Principal principal){
         String username = principal.getName();
@@ -39,9 +37,12 @@ public class PostControllerAPI {
         return post;
     }
     @GetMapping("/show")
-    public ResponseEntity<Iterable<Post>> showAllPost(){
-        Iterable<Post> listPost = postService.findAll();
+    public ResponseEntity<Iterable<Post>> showAllPost(Principal principa, Pageable pageable){
+        Account account = accountService.findAccountByUserName(principa.getName());
+        Newsfeed newsfeed = account.getNewsfeed();
+        Iterable<Post> listPost = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed, pageable);
         return new ResponseEntity<>(listPost, HttpStatus.OK);
+
     }
 
 }

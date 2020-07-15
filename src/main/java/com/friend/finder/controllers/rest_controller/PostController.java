@@ -37,6 +37,7 @@ public class PostController {
         Newsfeed newsfeed = account.getNewsfeed();
         Iterable<Post> listPost = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed, pageable);
         mv.addObject("listPost", listPost);
+        mv.addObject("account", account);
         mv.addObject("post", new Post());
         mv.addObject("comment", new Comment());
         return mv;
