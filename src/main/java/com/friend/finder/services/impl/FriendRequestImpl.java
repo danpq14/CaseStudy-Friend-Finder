@@ -16,7 +16,7 @@ public class FriendRequestImpl implements FriendRequestService {
 
     @Override
     public FriendRequest getAllByReceiveAccountAndStatusIsLike(Long receiveId, String status) {
-        return friendRequestRepository.getAllByReceiveAccountAndStatusIsLike(receiveId, status);
+        return friendRequestRepository.getAllByReceiveAccountAndStatusContaining(receiveId, status);
     }
 
     @Override

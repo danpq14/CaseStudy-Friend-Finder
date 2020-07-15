@@ -1,6 +1,7 @@
 package com.friend.finder.models;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,4 +22,6 @@ public class Notification {
 
     //SubString thành mảng, size mảng >3 thì chuyển thành A,B,C + n Người khác đã bình luận/like
     private String names;
+
+    private Timestamp timestamp;
 }

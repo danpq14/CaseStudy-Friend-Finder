@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "friendRequest")
@@ -19,4 +20,10 @@ public class FriendRequest {
     private Long receiveAccount;
 
     private String status;
+
+    private Timestamp timestamp;
+
+    public FriendRequest() {
+        this.timestamp = new Timestamp(System.currentTimeMillis());
+    }
 }
