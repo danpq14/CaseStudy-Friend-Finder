@@ -32,10 +32,11 @@ public class TimelineController {
         Page<Post> postList = postService.getPostsByAccountOrderByPostTime(account,pageable);
         modelAndView.addObject("account",account);
         modelAndView.addObject("postList",postList);
+        modelAndView.addObject("profile",profile);
         if (isNewUser(profile)){
             modelAndView.setViewName("profile-editing");
             return modelAndView;
-        }
+        }else
         return modelAndView;
     }
 

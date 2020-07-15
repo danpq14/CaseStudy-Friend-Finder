@@ -37,7 +37,7 @@ public class FriendController {
     private ProfileService profileService;
 
     @PostMapping("/app/search-friend")
-    public ModelAndView addFriend(@ModelAttribute("username") String username, Principal principal){
+    public ModelAndView addFriend(@ModelAttribute("friend") String username, Principal principal){
         List<Profile> profileList = profileService.findAllByFirstNameContainingOrLastNameContaining(username, username);
         List<Account> resultList = new ArrayList<>();
         if (!profileList.isEmpty() && profileList != null) {
