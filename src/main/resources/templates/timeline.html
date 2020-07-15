@@ -140,10 +140,19 @@
                                 <div class="tools">
                                     <ul class="publishing-tools list-inline">
                                         <li><a href="#"><i class="ion-compose"></i></a></li>
-                                        <li><a href="#"><i class="ion-images"></i></a></li>
+                                        <li><button id="button" type="button" ><i class="ion-images"></i></button></li>
+                                        <li><div id="fn" hidden>Image Url
+                                            <input type="text"/>
+                                        </div></li>
                                         <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
                                         <li><a href="#"><i class="ion-map"></i></a></li>
                                     </ul>
+                                    <script>
+                                        $("#button").click(function() {
+                                            $("#fn").show();
+                                        });
+                                    </script>
+
                                     <button class="btn btn-primary pull-right">Publish</button>
                                 </div>
                             </div>

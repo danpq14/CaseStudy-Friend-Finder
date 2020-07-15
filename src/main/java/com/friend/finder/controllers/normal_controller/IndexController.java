@@ -24,11 +24,13 @@ public class IndexController {
     }
 
     @GetMapping("/index")
-    public String getIndexPage(Model model){
+    public String getIndexPage(Model model,Principal principal){
         Account account = new Account();
-
+        if(principal != null){
+            return "redirect:/app/timeline";
+        }else{
         model.addAttribute("account", account);
-        return "index";
+        return "index";}
     }
 
 }

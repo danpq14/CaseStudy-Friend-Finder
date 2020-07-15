@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class SignUpController {
@@ -46,8 +47,11 @@ public class SignUpController {
     }
 
     @GetMapping("/login")
-    public ModelAndView loginPage() {
-        return new ModelAndView("login-page");
+    public String loginPage(Principal principal) {
+        if(principal != null){
+            return "redirect:/app/timeline";
+        }else
+        return "login-page";
     }
 
     @GetMapping("/logout")
