@@ -1,12 +1,15 @@
 package com.friend.finder.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Comment {
 
     @Id
@@ -16,15 +19,15 @@ public class Comment {
     @ManyToOne
     private Account account;
 
-    @Column (columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private Timestamp postTime = new Timestamp(System.currentTimeMillis());
 
-    @ManyToOne(cascade =  CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "post_comment",
-                joinColumns = @JoinColumn(name = "comment_id"),
-                inverseJoinColumns = @JoinColumn(name = "post_id"))
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Post post;
 
 }
