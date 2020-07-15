@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<Post> getPostsByAccountOrderByPostTime(Account account, Pageable pageable) {
-        return postRepository.getPostsByAccountOrderByPostTime(account,pageable);
+        return postRepository.getPostsByAccountOrderByPostTimeDesc(account,pageable);
     }
 
     @Override

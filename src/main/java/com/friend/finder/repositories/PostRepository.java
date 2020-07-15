@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends PagingAndSortingRepository<Post,Long> {
     Page<Post> getPostsByNewsfeedSetOrderByPostTimeDesc(Newsfeed newsfeed, Pageable pageable);
-    Page<Post> getPostsByAccountOrderByPostTime(Account account, Pageable pageable);
+    Page<Post> getPostsByAccountOrderByPostTimeDesc(Account account, Pageable pageable);
     List<Post> findAllByAccount(Account account);
 }
