@@ -1,12 +1,16 @@
 package com.friend.finder.services.impl;
 
+import com.friend.finder.models.Account;
 import com.friend.finder.models.FriendRequest;
+import com.friend.finder.models.FriendRequestToString;
 import com.friend.finder.repositories.FriendRequestRepository;
+import com.friend.finder.services.AccountService;
 import com.friend.finder.services.FriendRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class FriendRequestImpl implements FriendRequestService {
@@ -14,9 +18,12 @@ public class FriendRequestImpl implements FriendRequestService {
     @Autowired
     private FriendRequestRepository friendRequestRepository;
 
+    @Autowired
+    private AccountService accountService;
+
     @Override
-    public FriendRequest getAllByReceiveAccountAndStatusIsLike(Long receiveId, String status) {
-        return friendRequestRepository.getAllByReceiveAccountAndStatusIsLike(receiveId, status);
+    public List<FriendRequest> getAllByReceiveAccountAndStatusIsLike(Long receiveId, String status) {
+        return (List) friendRequestRepository.getAllByReceiveAccountAndStatusContaining(receiveId, status);
     }
 
     @Override
@@ -46,5 +53,15 @@ public class FriendRequestImpl implements FriendRequestService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public FriendRequestToString addFriendRequestToString(FriendRequest friendRequest) {
+        FriendRequestToString friendRequestToString = new FriendRequestToString();
+        Account account = accountService.findById(friendRequest.getSendAccount());
+        friendRequestToString.setFriendRequest(friendRequest);
+        friendRequestToString.setSendAccountUsername(account.getUsername());
+        friendRequestToString.setString(account);
+        return friendRequestToString;
     }
 }

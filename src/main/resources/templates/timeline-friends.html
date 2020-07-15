@@ -1,363 +1,348 @@
-<!DOCTYPE html  >
-<html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="This is social network html5 template available in themeforest......" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
-		<title>My Friends | Friend Finder Friend List</title>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This is social network html5 template available in themeforest......"/>
+  <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page"/>
+  <meta name="robots" content="index, follow"/>
+  <title>My Timeline | This is My Coolest Profile</title>
 
-    <!-- Stylesheets
-    ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/ionicons.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <!--Google Webfont-->
-		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
-    <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
-	</head>
-  <body>
-    <!-- Header
-    ================================================= -->
-		<header id="header">
-      <nav class="navbar navbar-default navbar-fixed-top menu">
-        <div class="container">
+  <!-- Stylesheets
+  ================================================= -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+  <link rel="stylesheet" href="/static/css/ionicons.min.css"/>
+  <link rel="stylesheet" href="/static/css/font-awesome.min.css"/>
+  <link href="/static/css/emoji.css" rel="stylesheet">
+  <!--Google Webfont-->
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700'
+        rel='stylesheet' type='text/css'>
+  <!--Favicon-->
+  <link rel="shortcut icon" type="image/png" href="/static/images/fav.png"/>
+</head>
+<body>
 
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo" /></a>
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="dropdown"><a href="#">Home</a></li>
-              <li class="dropdown">
-                <a href="/app/newsfeed" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Newsfeed</span></a>
-              </li>
-              <li class="dropdown">
-                <a href="/app/timeline" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Timeline</a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false">Notification</a>
-              </li>
-              <li class="dropdown"><a href="/logout">Logout</a></li>
-            </ul>
-            <form class="navbar-form navbar-right hidden-sm" action="/app/search-friend" method="post">
-              <div class="form-group">
-                <i class="icon ion-android-search"></i>
-                <input onsubmit="this" type="text" class="form-control" name="friend" placeholder="Search friends, photos, videos">
-              </div>
-            </form>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-      </nav>
-    </header>
-    <!--Header End-->
-
+<!-- Header
+================================================= -->
+<header id="header">
+  <nav class="navbar navbar-default navbar-fixed-top menu">
     <div class="container">
 
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
-        <div class="timeline-cover">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="/static/images/logo.png" alt="logo"/></a>
+      </div>
 
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="profile-info">
-                  <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-                  <h3>Sarah Cruiz</h3>
-                  <p class="text-muted">Creative Director</p>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="profile.html">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html" class="active">Friends</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  <li>1,299 people following her</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
-                </ul>
-              </div>
-            </div>
-          </div><!--Timeline Menu for Large Screens End-->
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right main-menu">
+          <li class="dropdown"><a href="#">Home</a></li>
+          <li class="dropdown">
+            <a href="/app/newsfeed">Newsfeed</span></a>
+          </li>
+          <li class="dropdown">
+            <a href="/app/timeline">Timeline</a>
+          </li>
+          <li class="dropdown">
+            <a href="/app/notification">Notification</a>
+          </li>
+          <li class="dropdown"><a href="/logout">Logout</a></li>
+        </ul>
+        <form class="navbar-form navbar-right hidden-sm" action="/app/search-friend" method="post">
+          <div class="form-group">
+            <i class="icon ion-android-search"></i>
+            <input onsubmit="this" type="text" class="form-control" name="friend"
+                   placeholder="Search friends, photos, videos">
+          </div>
+        </form>
+      </div>
+        <form class="navbar-form navbar-right hidden-sm" method="post" th:action="@{/app/search-friend}">
+          <div class="form-group">
+            <i class="icon ion-android-search"></i>
+            <input onsubmit="this" type="text" name="username" class="form-control"
+                   placeholder="Search friends, photos, videos">
+          </div>
+        </form>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+</header>
+<!--Header End-->
 
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
+<div class="container">
+
+  <!-- Timeline
+  ================================================= -->
+  <div class="timeline">
+    <div class="timeline-cover" th:style="'background-image:url(' + ${account.profile.cover} + ');'">
+
+      <!--Timeline Menu for Large Screens-->
+      <div class="timeline-nav-bar hidden-sm hidden-xs">
+        <div class="row">
+          <div class="col-md-3">
             <div class="profile-info">
-              <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-              <h4>Sarah Cruiz</h4>
-              <p class="text-muted">Creative Director</p>
+              <img th:src="${account.profile.avatar}" alt="" class="img-responsive profile-photo"/>
+              <h3 th:text="${account.profile.firstName +' '+account.profile.lastName}"></h3>
+              <p class="text-muted" th:text="${account.profile.job}"></p>
             </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a href="timline.html">Timeline</a></li>
-                <li><a href="profile.html">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html" class="active">Friends</a></li>
-              </ul>
-              <button class="btn-primary">Add Friend</button>
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
-
+          </div>
+          <div class="col-md-9">
+            <ul class="list-inline profile-menu">
+              <li><a href="#" class="active">Timeline</a></li>
+              <li><a th:href="@{/app/timeline/{username}(username=*{account.username})}">About</a></li>
+            </ul>
+            <ul class="follow-me list-inline">
+              <li><p th:text="${account.getFriends().size()+' Friends'}"></p></li>
+              <li>
+                <button onclick="addFriend()" class="btn-primary"><p id="isFriend" th:text="${message}"></p></button>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="page-contents">
+      </div><!--Timeline Menu for Large Screens End-->
+
+      <!--Timeline Menu for Small Screens-->
+      <div class="navbar-mobile hidden-lg hidden-md">
+        <div class="profile-info">
+          <img th:src="${account.profile.avatar}" alt="" class="img-responsive profile-photo"/>
+          <h3 th:text="${account.profile.firstName +' '+account.profile.lastName}"></h3>
+          <p class="text-muted" th:text="${account.profile.job}"></p>
+        </div>
+        <div class="mobile-menu">
+          <ul class="list-inline">
+            <li><a href="#" class="active">Timeline</a></li>
+            <li><a th:href="@{/app/profile/{username}(username=*{account.username})}">About</a></li>
+            <input type="hidden" th:value="*{account.id}" id="account_id">
+          </ul>
+          <button onclick="addFriend()" class="btn-primary"><p id="isFriend1" th:text="${message}"></p></button>
+        </div>
+      </div><!--Timeline Menu for Small Screens End-->
+
+    </div>
+    <div id="page-contents">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+
+          <!-- Post Content
+          ================================================= -->
+          <div class="post-content">
+            <th:block th:each="post : ${postList}">
+              <!--Post Date-->
+              <div class="post-date hidden-xs hidden-sm">
+                <h5 th:text="${account.profile.firstName}"></h5>
+                <p class="text-grey" th:text="${post.postTime}"></p>
+              </div><!--Post Date End-->
+
+              <img src="/static/images/post-images/12.jpg" alt="post-image"
+                   class="img-responsive post-image"/>
+              <div class="post-container">
+                <img th:src="${account.profile.avatar}" alt="user"
+                     class="profile-photo-md pull-left"/>
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h5><a href="timeline.html" class="profile-link"
+                           th:text="${account.profile.firstName}"></a></h5>
+                    <p class="text-muted" th:text="${'Published at' + post.postTime}"></p>
+                  </div>
+                  <div class="reaction">
+                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <b><p th:text="${post.content}"><i
+                            class="em em-anguished"></i> <i class="em em-anguished"></i> <i
+                            class="em em-anguished"></i></p></b>
+                  </div>
+                  <div class="line-divider"></div>
+                  <th:block th:each="comment : ${post.getComments()}">
+                    <div class="post-comment">
+                      <img th:src="${comment.account.profile.avatar}" alt=""
+                           class="profile-photo-sm"/>
+                      <p><a href="timeline.html" class="profile-link" th:text="${comment.account.profile.firstName}"> </a><i
+                              class="em em-laughing"></i> <span th:text="${comment.content}"></span> </p>
+                    </div>
+                  </th:block>
+                  <div class="post-comment">
+                    <img th:src="${account.profile.avatar}" alt="" class="profile-photo-sm"/>
+                    <input type="text" class="form-control" placeholder="Post a comment">
+                  </div>
+                </div>
+              </div>
+            </th:block>
+          </div>
+
           <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
+            <div class="col-sm-12">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{'/app/timeline'(page=${postList.number - 1})}"
+                       th:if="${postList.hasPrevious()}">Previous</a>
+                  </li>
+                  <li class="page-item">
+                    <span th:text="${postList.number + 1}"></span><span th:text="${postList.totalPages}"></span>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{'/app/timeline'(page=${postList.number + 1})}"
+                       th:if="${postList.hasNext()}">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
 
-              <!-- Friend List
-              ================================================= -->
-              <div class="friend-list">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/1.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-3.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timeline.html" class="profile-link">Sophia Lee</a></h5>
-                          <p>Student at Harvard</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/3.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-4.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timeline.html" class="profile-link">John Doe</a></h5>
-                          <p>Traveler</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/4.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-10.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="timeline.html" class="pull-right text-green">My Friend</a>
-                          <h5><a href="#" class="profile-link">Julia Cox</a></h5>
-                          <p>Art Designer</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/5.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-7.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timelime.html" class="profile-link">Robert Cook</a></h5>
-                          <p>Photographer at Photography</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/6.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-8.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timeline.html" class="profile-link">Richard Bell</a></h5>
-                          <p>Graphic Designer at Envato</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/7.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-2.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timeline.html" class="profile-link">Linda Lohan</a></h5>
-                          <p>Software Engineer</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/8.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-9.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timeline.html" class="profile-link">Anna Young</a></h5>
-                          <p>Musician</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/9.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-6.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timeline.html" class="profile-link">James Carter</a></h5>
-                          <p>CEO at IT Farm</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="images/covers/10.jpg" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="images/users/user-5.jpg" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="timeline.html" class="profile-link">Alexis Clark</a></h5>
-                          <p>Traveler</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+
+        </div>
+        <div class="col-md-2 static">
+          <div id="sticky-sidebar">
+            <h4 class="grey">Sarah's activity</h4>
+            <div class="feed-item">
+              <div class="live-activity">
+                <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
+                <p class="text-muted">5 mins ago</p>
               </div>
             </div>
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar">
-                <h4 class="grey">Sarah's activity</h4>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
-                    <p class="text-muted">5 mins ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
-                    <p class="text-muted">an hour ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
-                    <p class="text-muted">4 hours ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
-                    <p class="text-muted">a day ago</p>
-                  </div>
-                </div>
+            <div class="feed-item">
+              <div class="live-activity">
+                <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
+                <p class="text-muted">an hour ago</p>
+              </div>
+            </div>
+            <div class="feed-item">
+              <div class="live-activity">
+                <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
+                <p class="text-muted">4 hours ago</p>
+              </div>
+            </div>
+            <div class="feed-item">
+              <div class="live-activity">
+                <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
+                <p class="text-muted">a day ago</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-
-    <!-- Footer
-    ================================================= -->
-    <footer id="footer">
-      <div class="container">
-      	<div class="row">
-          <div class="footer-wrapper">
-            <div class="col-md-3 col-sm-3">
-              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo" /></a>
-              <ul class="list-inline social-icons">
-              	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h6>For individuals</h6>
-              <ul class="footer-links">
-                <li><a href="">Signup</a></li>
-                <li><a href="">login</a></li>
-                <li><a href="">Explore</a></li>
-                <li><a href="">Finder app</a></li>
-                <li><a href="">Features</a></li>
-                <li><a href="">Language settings</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h6>For businesses</h6>
-              <ul class="footer-links">
-                <li><a href="">Business signup</a></li>
-                <li><a href="">Business login</a></li>
-                <li><a href="">Benefits</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Advertise</a></li>
-                <li><a href="">Setup</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h6>About</h6>
-              <ul class="footer-links">
-                <li><a href="">About us</a></li>
-                <li><a href="">Contact us</a></li>
-                <li><a href="">Privacy Policy</a></li>
-                <li><a href="">Terms</a></li>
-                <li><a href="">Help</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-3">
-              <h6>Contact Us</h6>
-                <ul class="contact">
-                	<li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
-                	<li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
-                  <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
-                </ul>
-            </div>
-          </div>
-      	</div>
+<!-- Footer
+================================================= -->
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-wrapper">
+        <div class="col-md-3 col-sm-3">
+          <a href=""><img src="/static/images/logo-black.png" alt="" class="footer-logo"/></a>
+          <ul class="list-inline social-icons">
+            <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+            <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-2">
+          <h6>For individuals</h6>
+          <ul class="footer-links">
+            <li><a href="">Signup</a></li>
+            <li><a href="">login</a></li>
+            <li><a href="">Explore</a></li>
+            <li><a href="">Finder app</a></li>
+            <li><a href="">Features</a></li>
+            <li><a href="">Language settings</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-2">
+          <h6>For businesses</h6>
+          <ul class="footer-links">
+            <li><a href="">Business signup</a></li>
+            <li><a href="">Business login</a></li>
+            <li><a href="">Benefits</a></li>
+            <li><a href="">Resources</a></li>
+            <li><a href="">Advertise</a></li>
+            <li><a href="">Setup</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-2">
+          <h6>About</h6>
+          <ul class="footer-links">
+            <li><a href="">About us</a></li>
+            <li><a href="">Contact us</a></li>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="">Terms</a></li>
+            <li><a href="">Help</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <h6>Contact Us</h6>
+          <ul class="contact">
+            <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
+            <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
+            <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
+          </ul>
+        </div>
       </div>
-      <div class="copyright">
-        <p>Thunder Team © 2016. All rights reserved</p>
-      </div>
-		</footer>
-    
-    <!--preloader-->
-    <div id="spinner-wrapper">
-      <div class="spinner"></div>
     </div>
+  </div>
+  <div class="copyright">
+    <p>Thunder Team © 2016. All rights reserved</p>
+  </div>
+</footer>
 
-    <!-- Scripts
-    ================================================= -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.sticky-kit.min.js"></script>
-    <script src="js/jquery.scrollbar.min.js"></script>
-    <script src="js/script.js"></script>
-    
-  </body>
+<!--preloader-->
+<div id="spinner-wrapper">
+  <div class="spinner"></div>
+</div>
+
+<!-- Scripts
+================================================= -->
+<script>
+  function addFriend() {
+    let message = document.getElementById("isFriend");
+    let isFriend = message.innerText;
+    if (isFriend == "Friend") {
+      document.getElementById("message").innerHTML = "Friend";
+      return;
+    }
+    else if (isFriend == "Add Friend") {
+      sendFriendRequest()
+    }
+    function sendFriendRequest() {
+      let id = document.getElementById("account_id").value;
+      $.ajax({
+        headers: {
+          'Accept' : 'appilication/json',
+          'Content-Type' : 'appilication/json'
+        },
+        url : "http://localhost:6969/app/add-friend/"+ id,
+        type : "POST",
+        success : addFriendSuccess()
+      })
+    }
+    function addFriendSuccess() {
+      document.getElementById("isFriend").innerHTML = "Waiting to Response"
+    }
+  }
+</script>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery.sticky-kit.min.js"></script>
+<script src="/static/js/jquery.scrollbar.min.js"></script>
+<script src="/static/js/script.js"></script>
+<!--  ===================================================-->
+</body>
 </html>
