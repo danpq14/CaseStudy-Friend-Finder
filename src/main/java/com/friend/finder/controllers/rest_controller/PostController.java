@@ -34,8 +34,12 @@ public class PostController {
     public ModelAndView showNewsFeed(Principal principal, Pageable pageable){
         ModelAndView mv = new ModelAndView("newsfeed");
         Account account = accountService.findAccountByUserName(principal.getName());
-        Newsfeed newsfeed = account.getNewsfeed();
-        Iterable<Post> listPost = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(newsfeed, pageable);
+        Iterable<Post> listPost = postService.getPostsByNewsfeedSetOrderByPostTimeDesc(pageable);
+        for (Post post: listPost) {
+            Long postID = post.getId();
+            List<Comment> listComment = (List<Comment>) commentService.getCommentByNewsfeedSetOrderByPostTimeDesc();
+            mv.addObject(postID.toString(), listComment);
+        }
         mv.addObject("listPost", listPost);
         mv.addObject("post", new Post());
         mv.addObject("comment", new Comment());

@@ -156,7 +156,6 @@
                   ********************************
                   <div id = "longdeptrai">
                   </div>
-                  ********************************
                   ******************************************
                   <div id = "newPost">
                     <h1>Long</h1>
@@ -189,7 +188,7 @@
                             <img src="/static/images/users/user-4.jpg" alt="" class="profile-photo-sm" />
                             <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                           </div>
-                          <div  class="post-comment" th:each = "comment: ${listComment}">
+                          <div  class="post-comment" th:each = "comment: ${post.getComments()}">
                             <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
                             <p th:text="${comment.content}"><a href="timeline.html" class="profile-link">LONG</a></p>
                           </div>
@@ -198,16 +197,17 @@
                             <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
                             <p id="longdeptrai1" ><a href="timeline.html" class="profile-link">Long</a>Duong</p>
                           </div>
+                          <input th:id ="'idOfPostToWriteComment' + ${post.id}" type="text" th:value="${post.id}" >
+
                           -----------------------------
                           <div class="post-comment">
                             <img src="/static/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
                             <!--                    <form th:action="@{/myComment/create}" method="post" th:object="${comment}">-->
                             <form th:object="${comment}">
-                              <input id = "idOfPostToWriteComment" type="hidden" th:text="${post.id}" >
                               <input type="text" class="form-control" th:field="*{content}" placeholder="Post a comment">
                               <!--                      <input type="text" th:text="${user_name}">-->
 
-                              <input type="button" value="Send" onclick="addComment()">
+                              <input th:id ="${post.id}" type="button" value="Send" onclick="addComment(this)">
                               <!--                      <button type="submit">Save</button>-->
                             </form>
                           </div>
@@ -400,9 +400,10 @@
 <!--              </div>-->
 <!--            </div>-->
                   <script>
-                    function addComment() {
+                    function addComment(e) {
+                      console.log(e.id);
                       let content = document.getElementById("content").value;
-                      let id = document.getElementById("idOfPostToWriteComment").value;
+                      // let id = document.getElementById("idOfPostToWriteComment").value;
                       let comment = {
                         content : content
                       };
@@ -411,7 +412,7 @@
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        url: 'http://localhost:6969/app/myComment/create/' + id,
+                        url: 'http://localhost:6969/app/myComment/create/' + e.id,
                         type: 'POST',
                         data: JSON.stringify(comment),
                         success: sucessHandle,

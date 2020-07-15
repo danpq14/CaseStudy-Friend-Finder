@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("app/myComment")
@@ -20,10 +21,8 @@ public class CommentController {
     AccountService accountService;
     @GetMapping("")
     public ModelAndView showNewsFeed(Principal principal){
-        Iterable<Comment> listComment = commentService.findAll();
         ModelAndView modelAndView = new ModelAndView("newsfeed");
         modelAndView.addObject("comment", new Comment());
-        modelAndView.addObject("listComment", listComment);
         String user_name = principal.getName();
         modelAndView.addObject("user_name", accountService.findAccountByUserName(user_name).getId());
         return modelAndView;

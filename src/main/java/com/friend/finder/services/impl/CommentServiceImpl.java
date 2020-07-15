@@ -1,6 +1,7 @@
 package com.friend.finder.services.impl;
 
 import com.friend.finder.models.Comment;
+import com.friend.finder.models.Post;
 import com.friend.finder.repositories.CommentRepository;
 import com.friend.finder.services.CommentService;
 import com.friend.finder.services.FullService;
@@ -30,5 +31,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(Long id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Comment> getCommentByNewsfeedSetOrderByPostTimeDesc() {
+        return commentRepository.getCommentByNewsfeedSetOrderByPostTimeDesc();
     }
 }
