@@ -139,6 +139,7 @@
             </div><!-- Post Create Box End-->
                   <div id="oldPost">
                     <div th:each="post : ${listPost}">
+                      ,
                       <div class="post-content">
                         <img th:src="${post.images}" alt="post-image" class="img-responsive post-image" />
                         <div class="post-container">
