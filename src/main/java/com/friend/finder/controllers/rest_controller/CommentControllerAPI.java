@@ -1,36 +1,50 @@
 package com.friend.finder.controllers.rest_controller;
 
+import com.friend.finder.modelFake.CommentFake;
+import com.friend.finder.models.Account;
 import com.friend.finder.models.Comment;
+import com.friend.finder.models.Post;
 import com.friend.finder.services.AccountService;
 import com.friend.finder.services.CommentService;
+import com.friend.finder.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("myComment")
+@RequestMapping("/api")
 public class CommentControllerAPI {
     @Autowired
     CommentService commentService;
     @Autowired
     AccountService accountService;
-    @PostMapping("/create")
-    public void createComment(@RequestBody Comment comment){
+    @Autowired
+    private PostService postService;
+
+    @PostMapping("/create-comment")
+    public void createComment(@RequestBody Comment comment) {
+        Post post=postService.findById(comment.getPost().getId()).get();
+        Account account=accountService.findById(comment.getAccount().getId());
+        comment.setAccount(account);
+        comment.setPost(post);
         commentService.save(comment);
     }
-//    @PostMapping("/show")
-//    public ModelAndView showComment(){
-//        ModelAndView mv = new ModelAndView("newsfeed");
-//        List<Comment> listComment = (List<Comment>) commentService.findAll();
-//        mv.addObject("listComment", listComment);
-//        return mv;
-    @GetMapping("/show")
-    public String showComment(Model model){
-        Iterable<Comment> listComment = commentService.findAll();
-        model.addAttribute("listComment", listComment);
-        return "/newsfeed";
+
+    @GetMapping("/get-comments/{postId}")
+    public List<CommentFake> showComment(@PathVariable Long postId) {
+        Post post=postService.findById(postId).get();
+        List<CommentFake> list=new ArrayList<>();
+        CommentFake commentFake=new CommentFake();
+        List<Comment>list1=commentService.findCommentsByPost(post);
+        list=commentFake.getContentComment(list1);
+        return list;
     }
+
+
 }
