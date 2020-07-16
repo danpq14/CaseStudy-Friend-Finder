@@ -202,7 +202,7 @@
                                             <div class="post-comment">
                                                 <img th:src="${comment.account.profile.avatar}" alt=""
                                                      class="profile-photo-sm"/>
-                                                <p><a href="timeline.html" class="profile-link"
+                                                <p><a th:href="@{/app/profile/__${comment.account.username}__}" class="profile-link"
                                                       th:text="${comment.account.profile.firstName + ' ' +comment.account.profile.lastName}"> </a><p>&ensp;</p><span
                                                         th:text="${comment.content}"></span></p>
                                             </div>
@@ -210,12 +210,12 @@
                                         </div>
                                     <div class="post-comment">
                                         <img th:src="${account.profile.avatar}" alt="" class="profile-photo-sm"/>
-                                        <input th:name="${post.id}+'content'" type="text" class="form-control"
+                                        <input th:id="${post.id+'content'}" type="text" class="form-control"
                                                placeholder="Post a comment">
                                         <input type="hidden" th:value="${account.id}" id="accountId">
                                         <input type="hidden" th:value="${post.id}" id="postId">
-                                        <button class="btn-primary" type="submit" th:name="${post.id}"
-                                                onclick="postComment($(this)) ">Sent</button>
+                                        <button class="btn-primary" type="submit" th:id="${post.id}"
+                                                onclick="postComment(this)">Sent</button>
                                     </div>
                                 </div>
                             </div>
@@ -223,19 +223,19 @@
                     </div>
 
                     <script>
-                        let postId = document.getElementById("postId").value;
 
-                        function postComment(s) {
-                            let content = document.getElementById(postId+"content").value;
+                        function postComment(btn) {
+                            let id = btn.getAttribute("id");
+                            console.log(id);
+                            let content = document.getElementById(id+"content").value;
                             let accountId = document.getElementById("accountId").value;
-
                             let comment = {
                                 content: content,
                                 account: {
                                     id: accountId,
                                 },
                                 post: {
-                                    id: postId
+                                    id: id
                                 }
                             };
                             $.ajax({
@@ -246,29 +246,33 @@
                                 url: 'http://localhost:6969/api/create-comment',
                                 type: 'POST',
                                 data: JSON.stringify(comment),
-                                success: saveComment(s),
+                                success: saveComment(id),
                                 error: fail
                             });
 
                         }
 
-                        function saveComment(s) {
+                        function saveComment(id) {
                             $("#content").val("");
-                            $.get({
-                                url: 'http://localhost:6969/api/get-comments/' + postId,
-                            },function (response,s) {
-                                showComments(response,s);
-                            })
+                            $.ajax({
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                url: 'http://localhost:6969/api/get-comments/'+id,
+                                type: 'GET',
+                                success: showComments,
+                            });
                         }
 
-                        function showComments(response,s) {
-                            let idxx = s.attr("name")
-
+                        function showComments(response) {
                             let content = "";
-                            for (let i = 0; i < response.length; i++) {
-                                content += getComment(response[i]);
+                            let id = response.postId;
+                            let comments = response.comments;
+                            for (let i = 0; i < comments.length; i++) {
+                                content += getComment(comments[i]);
                             }
-                            document.getElementById(idxx).innerHTML = content;
+                            document.getElementById(id).innerHTML = content;
                             // document.getElementById("message").value = ""
 
                         }

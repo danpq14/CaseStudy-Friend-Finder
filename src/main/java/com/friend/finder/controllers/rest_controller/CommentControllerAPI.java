@@ -1,6 +1,7 @@
 package com.friend.finder.controllers.rest_controller;
 
 import com.friend.finder.modelFake.CommentFake;
+import com.friend.finder.modelFake.CommentResponse;
 import com.friend.finder.models.Account;
 import com.friend.finder.models.Comment;
 import com.friend.finder.models.Post;
@@ -37,13 +38,15 @@ public class CommentControllerAPI {
     }
 
     @GetMapping("/get-comments/{postId}")
-    public List<CommentFake> showComment(@PathVariable Long postId) {
+    public CommentResponse showComment(@PathVariable Long postId) {
         Post post=postService.findById(postId).get();
         List<CommentFake> list=new ArrayList<>();
         CommentFake commentFake=new CommentFake();
         List<Comment>list1=commentService.findCommentsByPost(post);
         list=commentFake.getContentComment(list1);
-        return list;
+
+        CommentResponse response = new CommentResponse(postId, list);
+        return response;
     }
 
 
