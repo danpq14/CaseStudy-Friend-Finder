@@ -1,8 +1,6 @@
 package com.friend.finder.models;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -36,24 +34,34 @@ public class Account {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "newsfeed_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Newsfeed newsfeed;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinTable(name = "account_post",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<Post> posts;
 
     @ManyToMany(cascade = {CascadeType.ALL})
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinTable(name = "account_friend",
             joinColumns = {@JoinColumn(name = "account_id")},
             inverseJoinColumns = {@JoinColumn(name = "friend_id")})
     private List<Account> friends;
 
     @OneToMany(mappedBy = "account")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Likes> likes;
 
     @OneToMany(mappedBy = "account")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Dislikes> dislikes;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -28,7 +28,7 @@ public class ChatController {
         Account account = accountService.findAccountByUserName(principal.getName());
         return account;
     }
-    @GetMapping("/chat")
+    @GetMapping("/app/chat")
     public String chatView(@ModelAttribute("user") Account account){
         return "chat";
 

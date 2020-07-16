@@ -1,8 +1,6 @@
 package com.friend.finder.models;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -52,6 +50,8 @@ public class Profile {
     private String gender;
 
     @OneToOne(mappedBy = "profile")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Account account;
 
     public Profile() {

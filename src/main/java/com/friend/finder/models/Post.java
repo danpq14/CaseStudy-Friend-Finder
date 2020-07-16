@@ -1,8 +1,6 @@
 package com.friend.finder.models;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -33,15 +31,23 @@ public class Post {
     private Timestamp postTime = new Timestamp(System.currentTimeMillis());
 
     @ManyToMany(mappedBy = "postSet")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Newsfeed> newsfeedSet;
 
     @OneToMany(mappedBy = "post")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Notification> notifications;
 
     @OneToMany(mappedBy = "post")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Comment> comments;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinColumn(name = "images_id")
     private Image images;
 

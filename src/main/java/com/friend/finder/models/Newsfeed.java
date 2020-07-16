@@ -1,8 +1,6 @@
 package com.friend.finder.models;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -20,6 +18,8 @@ public class Newsfeed {
     private Account account;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinTable(name = "newsfeed_post",
                 joinColumns = @JoinColumn(name = "newsfeed_id"),
                 inverseJoinColumns = @JoinColumn(name = "post_id"))

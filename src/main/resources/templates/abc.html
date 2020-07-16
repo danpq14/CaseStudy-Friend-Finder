@@ -149,58 +149,27 @@
                                     </table>
                                 </form>
                             </div>
-<!--                                    <div class="form-group">-->
-<!--                                        <img th:src="${account.profile.avatar}" alt="" class="profile-photo-md"/>-->
-<!--                                        <textarea name="texts" id="post-content" cols="30" rows="1" class="form-control"-->
-<!--                                                  placeholder="Write what you wish"></textarea>-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <button id="button" type="button" ><i class="ion-images"></i></button>-->
-<!--                                        <input name="texts"  class="form-control"-->
-<!--                                               placeholder="Image URL">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <button class="btn btn-primary pull-right">Publish</button>-->
-<!--                                    </div>-->
-<!--                            <div class="col-md-5 col-sm-5">-->
-<!--                                <div class="tools">-->
-<!--                                    <ul class="publishing-tools list-inline">-->
-<!--                                        <li><a href="#"><i class="ion-compose"></i></a></li>-->
-<!--                                        <li><button id="button" type="button" ><i class="ion-images"></i></button></li>-->
-<!--                                        <li><div id="fn" hidden>Image Url-->
-<!--                                            <input type="text"/>-->
-<!--                                        </div></li>-->
-<!--                                        <li><a href="#"><i class="ion-ios-videocam"></i></a></li>-->
-<!--                                        <li><a href="#"><i class="ion-map"></i></a></li>-->
-<!--                                    </ul>-->
-<!--                                    <script>-->
-<!--                                        $("#button").click(function() {-->
-<!--                                            $("#fn").show();-->
-<!--                                        });-->
-<!--                                    </script>-->
-
-<!--                                    <button class="btn btn-primary pull-right">Publish</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
                         </div>
-                    </div><!-- Post Create Box End-->
+                    </div>
+                    <!-- Post Create Box End-->
 
                     <!-- Post Content
                     ================================================= -->
                     <th:block th:if="${postList.content.size()==0}">
                         <b><p style="color: blue" th:text="${account.profile.firstName+' have not posted anything! '}"></p></b>
                     </th:block>
-
-                    <div class="post-content">
-                        <th:block th:each="post : ${postList}">
+                    <th:block th:each="post : ${postList}">
+                    <div class="post-content" style="border: 0.5px solid grey">
                             <!--Post Date-->
                             <div class="post-date hidden-xs hidden-sm">
                                 <h5 th:text="${account.profile.firstName+' '+account.profile.lastName}"></h5>
                                 <p class="text-grey" th:text="${post.postTime}"></p>
                             </div><!--Post Date End-->
 
-                            <img th:src="${post.images?.href}" alt="post-image"
-                                 class="img-responsive post-image"/>
+                            <th:block th:if="${post.images.href != 'noimg'}">
+                                <img th:src="${post.images.href}" alt="post-image"
+                                     class="img-responsive post-image"/>
+                            </th:block>
                             <div class="post-container">
                                 <img th:src="${account.profile.avatar}" alt="user"
                                      class="profile-photo-md pull-left"/>
@@ -235,8 +204,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </th:block>
                     </div>
+                    </th:block>
 
                     <div class="row">
                         <div class="col-sm-12">

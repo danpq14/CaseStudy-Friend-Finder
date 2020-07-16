@@ -36,11 +36,9 @@ public class PostController {
         Post post = new Post();
         Image image = new Image();
         if (href == null || href == "") {
-            image = null;
+            image.setHref("noimg");
         }
-        else {
-            image.setHref(href);
-        }
+
         post.setAccount(account);
         post.setContent(content);
         post.setImages(imageService.save(image));
@@ -51,10 +49,12 @@ public class PostController {
         for (Account fr : friends) {
             friendNewsfeed.add(fr.getNewsfeed());
         }
+        friendNewsfeed.add(account.getNewsfeed());
         for (Newsfeed newsfeed : friendNewsfeed) {
             newsfeed.getPostSet().add(postService.save(post));
             newsfeedService.save(newsfeed);
         }
+
         Profile profile = account.getProfile();
         ModelAndView modelAndView = new ModelAndView("abc");
         Page<Post> postList = postService.getPostsByAccountOrderByPostTime(account,pageable);
