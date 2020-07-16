@@ -130,67 +130,62 @@
                     <div class="create-post">
                         <div class="row">
                             <div class="col-md-7 col-sm-7">
-                                <div class="form-group">
-                                    <img th:src="${account.profile.avatar}" alt="" class="profile-photo-md"/>
-                                    <textarea name="texts" id="post-content" cols="30" rows="1" class="form-control"
-                                              placeholder="Write what you wish"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-5 col-sm-5">
-                                <div class="tools">
-                                    <ul class="publishing-tools list-inline">
-                                        <li><a href="#"><i class="ion-compose"></i></a></li>
-                                        <li><button id="button" type="button" ><i class="ion-images"></i></button></li>
-                                        <li><div id="fn" hidden>Image Url
-                                            <input type="text"/>
-                                        </div></li>
-                                        <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                                        <li><a href="#"><i class="ion-map"></i></a></li>
-                                    </ul>
-                                    <script>
-                                        $("#button").click(function() {
-                                            $("#fn").show();
-                                        });
-                                    </script>
-
-                                    <button class="btn btn-primary pull-right">Publish</button>
-                                </div>
+                                <form th:action="@{/app/create-post}" method="post">
+                                    <table>
+                                        <tr>
+                                            <td><img th:src="${account.profile.avatar}" alt="" class="profile-photo-md"/></td>
+                                            <td colspan="2"><textarea style="width: auto" name="texts" id="post-content" cols="60" rows="3" class="form-control"
+                                                                      placeholder="Write what you wish"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><button id="button" type="button" ><i class="ion-images"></i></button></td>
+                                            <td><input name="imghref"  class="form-control"
+                                                       placeholder="Image URL"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td> <button class="btn btn-primary pull-right">Publish</button></td>
+                                        </tr>
+                                    </table>
+                                </form>
                             </div>
                         </div>
-                    </div><!-- Post Create Box End-->
+                    </div>
+                    <!-- Post Create Box End-->
 
                     <!-- Post Content
                     ================================================= -->
                     <th:block th:if="${postList.content.size()==0}">
                         <b><p style="color: blue" th:text="${account.profile.firstName+' have not posted anything! '}"></p></b>
                     </th:block>
-
-                    <div class="post-content">
-                        <th:block th:each="post : ${postList}">
+                    <th:block th:each="post : ${postList}">
+                        <div class="post-content" style="border: 0.5px solid grey">
                             <!--Post Date-->
                             <div class="post-date hidden-xs hidden-sm">
-                                <h5 th:text="${account.profile.firstName}"></h5>
+                                <h5 th:text="${account.profile.firstName+' '+account.profile.lastName}"></h5>
                                 <p class="text-grey" th:text="${post.postTime}"></p>
                             </div><!--Post Date End-->
 
-                            <img src="/static/images/post-images/12.jpg" alt="post-image"
-                                 class="img-responsive post-image"/>
+                            <th:block th:if="${post.images.href != 'noimg'}">
+                                <img th:src="${post.images.href}" alt="post-image"
+                                     class="img-responsive post-image"/>
+                            </th:block>
                             <div class="post-container">
                                 <img th:src="${account.profile.avatar}" alt="user"
                                      class="profile-photo-md pull-left"/>
                                 <div class="post-detail">
                                     <div class="user-info">
-                                        <h5><a href="timeline.html" class="profile-link"
-                                               th:text="${account.profile.firstName}"></a></h5>
-                                        <p class="text-muted" th:text="${'Published at' + post.postTime}"></p>
+                                        <h5><a th:href="@{/app/profile/__${account.username}__}" class="profile-link"
+                                               th:text="${account.profile.firstName + ' ' + account.profile.lastName}"></a></h5>
+                                        <!--                                        <p class="text-muted" th:text="${'Published at' + post.postTime}"></p>-->
                                     </div>
                                     <div class="reaction">
-                                        <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                                        <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                                        <a class="btn text-green"><i class="icon ion-thumbsup"></i></a>
+                                        <a class="btn text-red"><i class="fa fa-thumbs-down"></i></a>
                                     </div>
                                     <div class="line-divider"></div>
                                     <div class="post-text">
-                                       <b><p th:text="${post.content}"><i
+                                        <b><p th:text="${post.content}"><i
                                                 class="em em-anguished"></i> <i class="em em-anguished"></i> <i
                                                 class="em em-anguished"></i></p></b>
                                     </div>
@@ -199,7 +194,7 @@
                                         <div class="post-comment">
                                             <img th:src="${comment.account.profile.avatar}" alt=""
                                                  class="profile-photo-sm"/>
-                                            <p><a href="timeline.html" class="profile-link" th:text="${comment.account.profile.firstName}"> </a><i
+                                            <p><a href="timeline.html" class="profile-link" th:text="${comment.account.profile.firstName + ' ' +comment.account.profile.lastName}"> </a><i
                                                     class="em em-laughing"></i> <span th:text="${comment.content}"></span> </p>
                                         </div>
                                     </th:block>
@@ -209,8 +204,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </th:block>
-                    </div>
+                        </div>
+                    </th:block>
 
                     <div class="row">
                         <div class="col-sm-12">
