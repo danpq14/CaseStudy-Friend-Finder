@@ -210,7 +210,7 @@
                                         </div>
                                     <div class="post-comment">
                                         <img th:src="${account.profile.avatar}" alt="" class="profile-photo-sm"/>
-                                        <input th:id="${post.id+'content'}" type="text" class="form-control"
+                                        <input th:id="${'content'+post.id}" type="text" class="form-control"
                                                placeholder="Post a comment">
                                         <input type="hidden" th:value="${account.id}" id="accountId">
                                         <input type="hidden" th:value="${post.id}" id="postId">
@@ -227,7 +227,7 @@
                         function postComment(btn) {
                             let id = btn.getAttribute("id");
                             console.log(id);
-                            let content = document.getElementById(id+"content").value;
+                            let content = document.getElementById("content"+id).value;
                             let accountId = document.getElementById("accountId").value;
                             let comment = {
                                 content: content,
@@ -253,7 +253,7 @@
                         }
 
                         function saveComment(id) {
-                            $("#content").val("");
+                            $("#content"+id).val("");
                             $.ajax({
                                 headers: {
                                     'Accept': 'application/json',
